@@ -18,4 +18,4 @@ server.pid
 
 # Ignore Eclipse
 .classpath
-/.settings
+.settings/
