@@ -21,5 +21,13 @@ public class Application extends Controller {
         List<Recipe> olderRecipes = Recipe.find("order by postedAt desc").from(1).fetch(10);
         render(frontRecipe, olderRecipes);
     }
+    
+    public static void postComment(Long recipeId, String login, String content, int rating) {
+        Recipe recipe = Recipe.findById(recipeId);
+        // TODO: vérifier que l'utilisateur est connecté pour poster un commentaire
+        User user = User.find("byLogin", login).first();
+        recipe.addComment(user, content, rating);
+        show(recipeId);
+    }
 
 }
