@@ -144,7 +144,7 @@ public class BasicTest extends UnitTest {
     
     @Test
     public void fullTestFromData() {
-        Fixtures.loadModels("data.yml");
+        Fixtures.loadModels("test-data.yml");
      
         // Count things
         assertEquals(2, User.count());
