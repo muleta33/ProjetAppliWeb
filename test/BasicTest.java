@@ -143,8 +143,8 @@ public class BasicTest extends UnitTest {
     }
     
     @Test
-    public void fullTest() {
-        Fixtures.loadModels("data.yml");
+    public void fullTestFromData() {
+        Fixtures.loadModels("test-data.yml");
      
         // Count things
         assertEquals(2, User.count());
@@ -160,6 +160,11 @@ public class BasicTest extends UnitTest {
         // Find all of Bob's recipes
         List<Recipe> bobRecipe = Recipe.find("author.login", "Bobby38").fetch();
         assertEquals(1, bobRecipe.size());
+        // Random test
+        assertEquals(2, bobRecipe.get(0).numberOfPersons);
+        // Check the compute of the rating
+        bobRecipe.get(0).computeRating();
+        assertEquals(4.5, bobRecipe.get(0).rating, 0.001);
      
         // Find all comments related to Bob's recipes
         List<Comment> bobRecipeComments = Comment.find("recipe.author.login", "Bobby38").fetch();
