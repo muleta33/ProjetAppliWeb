@@ -11,3 +11,21 @@ User(jeff):
     login: Jeff33 
     password: secret
     
+Ingredient(firstIngredient):
+	description: le premier ingrédient
+	
+Ingredient(secondIngredient):
+	description: le deuxième ingrédient
+    
+Recipe(firstBobRecipe):
+	postedAt: 2016-01-14
+	author: bob
+	title: My first recipe
+	category: Plat
+    preparationTime: 25
+    cookingTime: 30
+    numberOfPersons 2
+    ingredients: 	- firstIngredient
+    				- secondIngredient
+    content: 	>
+    			On mélange tout et c'est prêt.
