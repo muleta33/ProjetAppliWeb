@@ -60,4 +60,12 @@ public class Recipe extends Model {
         return rating;
     }
     
+    public Recipe previous() {
+        return Recipe.find("postedAt < ? order by postedAt desc", postedAt).first();
+    }
+
+    public Recipe next() {
+        return Recipe.find("postedAt > ? order by postedAt asc", postedAt).first();
+    }
+    
 }

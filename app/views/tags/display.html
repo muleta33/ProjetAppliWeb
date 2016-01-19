@@ -2,7 +2,7 @@
  
 <div class="recipe ${_as == 'teaser' ? 'teaser' : ''}">
     <h2 class="recipe-title">
-        <a href="#">${_recipe.title}</a>
+        <a href="@{Application.show(_recipe.id)}">${_recipe.title}</a>
     </h2>
     <div class="recipe-metadata">
         <span class="recipe-author">by ${_recipe.author.login}</span>,
@@ -35,7 +35,7 @@
         #{list items:_recipe.comments, as:'comment'}
             <div class="comment">
                 <div class="comment-metadata">
-                    <span class="comment-author">by ${comment.author},</span>
+                    <span class="comment-author">by ${comment.author.login},</span>
                     <span class="comment-date">
                         ${comment.postedAt.format('dd MMM yy')}
                     </span>

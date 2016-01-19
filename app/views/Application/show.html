@@ -1,0 +1,21 @@
+#{extends 'main.html' /}
+#{set title:recipe.title /}
+
+<ul id="pagination">
+    #{if recipe.previous()}
+        <li id="previous">
+            <a href="@{Application.show(recipe.previous().id)}">
+                ${recipe.previous().title}
+            </a>
+        </li>
+    #{/if}
+    #{if recipe.next()}
+        <li id="next">
+            <a href="@{Application.show(recipe.next().id)}">
+                ${recipe.next().title}
+            </a>
+        </li>
+    #{/if}
+</ul>
+
+#{display recipe:recipe, as:'full' /}

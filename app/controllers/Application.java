@@ -22,6 +22,11 @@ public class Application extends Controller {
         render(frontRecipe, olderRecipes);
     }
     
+    public static void show(Long id) {
+        Recipe recipe = Recipe.findById(id);
+        render(recipe);
+    }
+
     public static void postComment(Long recipeId, String login, String content, int rating) {
         Recipe recipe = Recipe.findById(recipeId);
         // TODO: vérifier que l'utilisateur est connecté pour poster un commentaire
