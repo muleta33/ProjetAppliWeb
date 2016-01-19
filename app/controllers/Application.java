@@ -12,8 +12,8 @@ public class Application extends Controller {
 
     @Before
     static void addDefaults() {
-        renderArgs.put("blogTitle", Play.configuration.getProperty("application.title"));
-        renderArgs.put("blogBaseline", Play.configuration.getProperty("application.baseline"));
+        renderArgs.put("applicationTitle", Play.configuration.getProperty("application.title"));
+        renderArgs.put("applicationBaseline", Play.configuration.getProperty("application.baseline"));
     }
     
     public static void index() {

@@ -1,0 +1,51 @@
+*{ Display a recipe in one of these modes: 'full', 'home' or 'teaser' }*
+ 
+<div class="recipe ${_as == 'teaser' ? 'teaser' : ''}">
+    <h2 class="recipe-title">
+        <a href="#">${_recipe.title}</a>
+    </h2>
+    <div class="recipe-metadata">
+        <span class="recipe-author">by ${_recipe.author.login}</span>,
+        <span class="recipe-date">${_recipe.postedAt.format('dd MMM yy')}</span>
+        #{if _as != 'full'}
+            <span class="recipe-comments">
+                &nbsp;|&nbsp; ${_recipe.comments.size() ?: 'no'} 
+                comment${_recipe.comments.size().pluralize()}
+                #{if _recipe.comments}
+                    , latest by ${_recipe.comments[-1].author.login}
+                #{/if}
+            </span>
+        #{/if}
+    </div>
+    #{if _as != 'teaser'}
+        <div class="recipe-content">
+            <div class="about">Rating: </div>
+            ${_recipe.computeRating().nl2br()}
+        </div>
+    #{/if}
+</div>
+ 
+#{if _as == 'full'}
+    <div class="comments">
+        <h3>
+            ${_recipe.comments.size() ?: 'no'} 
+            comment${_recipe.comments.size().pluralize()}
+        </h3>
+        
+        #{list items:_recipe.comments, as:'comment'}
+            <div class="comment">
+                <div class="comment-metadata">
+                    <span class="comment-author">by ${comment.author},</span>
+                    <span class="comment-date">
+                        ${comment.postedAt.format('dd MMM yy')}
+                    </span>
+                </div>
+                <div class="comment-content">
+                    <div class="about">Detail: </div>
+                    ${comment.content.escape().nl2br()}
+                </div>
+            </div>
+        #{/list}
+        
+    </div>
+#{/if}
