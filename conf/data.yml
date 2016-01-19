@@ -35,7 +35,7 @@ Comment(c1):
     postedAt:           2016-01-17
     recipe:             firstBobRecipe
     author:             jeff
-    rating:             5
+    rating:             4
     content:            >
                         Hummmm c'est trop bon !
 
@@ -43,6 +43,6 @@ Comment(c2):
     postedAt:           2016-01-18
     recipe:             firstBobRecipe
     author:             bob
-    rating:             5
+    rating:             3
     content:            >
                         Merci beaucoup Jeff !
