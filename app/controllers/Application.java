@@ -21,5 +21,10 @@ public class Application extends Controller {
         List<Recipe> olderRecipes = Recipe.find("order by postedAt desc").from(1).fetch(10);
         render(frontRecipe, olderRecipes);
     }
+    
+    public static void show(Long id) {
+        Recipe recipe = Recipe.findById(id);
+        render(recipe);
+    }
 
 }
