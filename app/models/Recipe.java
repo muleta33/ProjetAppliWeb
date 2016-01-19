@@ -4,8 +4,6 @@ import play.db.jpa.Model;
 import java.util.*;
 import javax.persistence.*;
 
-import org.h2.engine.Comment;
-
 import play.db.jpa.*;
 
 @Entity
@@ -36,7 +34,7 @@ public class Recipe extends Model {
         this.author = author;
         this.title = title;
         this.category = category;
-        this.rating = computeRating();
+        this.rating = 0;
         this.preparationTime = preparationTime;
         this.cookingTime = cookingTime;
         this.numberOfPersons = numberOfPersons;
@@ -46,14 +44,14 @@ public class Recipe extends Model {
         this.postedAt = new Date();
     }
     
-    public Recipe addComment(String author, String content, int rating) {
+    public Recipe addComment(User author, String content, int rating) {
         Comment newComment = new Comment(this, author, content, rating).save();
         this.comments.add(newComment);
         this.save();
         return this;
     }
     
-    private float computeRating() {
+    public float computeRating() {
         rating = 0;
         for (Comment comment : comments) {
             rating += comment.rating;
