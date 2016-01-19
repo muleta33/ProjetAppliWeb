@@ -18,5 +18,9 @@ public class User extends Model {
         this.login = login;
         this.password = password;
     }
+    
+    public static User connect(String login, String password) {
+        return find("byLoginAndPassword", login, password).first();
+    }
  
 }
