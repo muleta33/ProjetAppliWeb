@@ -34,7 +34,7 @@ public class BasicTest extends UnitTest {
         ingredients.add(poulet);
         Ingredient basquaise = new Ingredient("basquaise").save();
         ingredients.add(basquaise);
-        new Recipe(bob, "Poulet basquaise", "Plat", 30, 60, 4, ingredients, "Préparation complète").save();
+        new Recipe(bob, "Poulet basquaise", DishCategory.Plat, 30, 60, 4, ingredients, "Préparation complète").save();
         
         // Test that the post has been created
         assertEquals(1, Recipe.count());
@@ -48,7 +48,7 @@ public class BasicTest extends UnitTest {
         assertNotNull(firstRecipe);
         assertEquals(bob, firstRecipe.author);
         assertEquals("Poulet basquaise", firstRecipe.title);
-        assertEquals("Plat", firstRecipe.category);
+        assertEquals(DishCategory.Plat, firstRecipe.category);
         assertEquals(30, firstRecipe.preparationTime);
         assertEquals(60, firstRecipe.cookingTime);
         assertEquals(4, firstRecipe.numberOfPersons);
