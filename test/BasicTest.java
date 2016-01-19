@@ -128,7 +128,7 @@ public class BasicTest extends UnitTest {
         // Retrieve Bob's post
         bobRecipe = Recipe.find("byAuthor", bob).first();
         assertNotNull(bobRecipe);
-     
+
         // Navigate to comments
         assertEquals(2, bobRecipe.comments.size());
         assertEquals("Jeff33", bobRecipe.comments.get(0).author.login);

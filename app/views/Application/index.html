@@ -1,4 +1,26 @@
 #{extends 'main.html' /}
 #{set title:'Home' /}
-<h1>Coooking Star test</h1>
-#{welcome /}
+ 
+#{if frontRecipe}
+    
+    #{display recipe:frontRecipe, as:'home' /}
+    
+    #{if olderRecipes.size()}
+    
+        <div class="older-recipes">
+            <h3>Older recipes <span class="from">from this blog</span></h3>
+        
+            #{list items:olderRecipes, as:'oldRecipe'}
+                #{display recipe:oldRecipe, as:'teaser' /}
+            #{/list}
+        </div>
+        
+    #{/if}
+    
+#{/if}
+ 
+#{else}
+    <div class="empty">
+        There is currently nothing to read here.
+    </div>
+#{/else}
