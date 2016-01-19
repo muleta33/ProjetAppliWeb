@@ -19,7 +19,20 @@
     </div>
     #{if _as != 'teaser'}
         <div class="recipe-content">
-            <div class="about">Rating: </div>
+            <div class="about">Detail: </div>
+            	<div class="recipe-time">Temps de préparation : ${_recipe.preparationTime} minutes</div>
+            	<div class="recipe-time">Temps de cuisson : ${_recipe.cookingTime} minutes</div>
+            	<div class="recipe-ingredients">
+            		Pour ${_recipe.numberOfPersons} personnes :
+            		#{list items:_recipe.ingredients, as:'ingredient'}
+            			<div class="ingredient">
+            				${ingredient.description.nl2br()}
+            			</div>
+        			#{/list}
+            	</div>
+            	<div class="recipe-description">
+            		${_recipe.content.nl2br()}
+            	</div>
             ${_recipe.computeRating().nl2br()}
         </div>
     #{/if}
