@@ -57,5 +57,44 @@ public class BasicTest extends UnitTest {
         assertEquals("Préparation complète", firstRecipe.content);
         assertNotNull(firstRecipe.postedAt);
     }
+    
+    @Test
+    public void postComments() {
+        // Create a new user and save it
+        User bob = new User("bob@gmail.com", "Bobby38", "secret").save();
+        
+        // Create a new user and save it
+        User jeff = new User("jeff@gmail.com", "Jeff33", "secret").save();
+     
+        // Create a new post
+        List<Ingredient> ingredients = new ArrayList<Ingredient>();
+        Ingredient poulet = new Ingredient("nothing").save();
+        ingredients.add(poulet);
+        Ingredient basquaise = new Ingredient("nothing again").save();
+        ingredients.add(basquaise);
+        Recipe bobRecipe = new Recipe(bob, "My first recipe", "Plat", 12, 25, 2, ingredients, "Blabla").save();
+     
+        // Post a first comment
+        new Comment(bobRecipe, jeff, "Nice recipe", 5).save();
+        new Comment(bobRecipe, bob, "Thanks !", 5).save();
+     
+        // Retrieve all comments
+        List<Comment> bobRecipeComments = Comment.find("byRecipe", bobRecipe).fetch();
+     
+        // Tests
+        assertEquals(2, bobRecipeComments.size());
+     
+        Comment firstComment = bobRecipeComments.get(0);
+        assertNotNull(firstComment);
+        assertEquals("Jeff33", firstComment.author.login);
+        assertEquals("Nice recipe", firstComment.content);
+        assertNotNull(firstComment.postedAt);
+     
+        Comment secondComment = bobRecipeComments.get(1);
+        assertNotNull(secondComment);
+        assertEquals("Bobby38", secondComment.author.login);
+        assertEquals("Thanks !", secondComment.content);
+        assertNotNull(secondComment.postedAt);
+    }
 
 }
