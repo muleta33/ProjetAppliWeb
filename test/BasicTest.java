@@ -36,10 +36,10 @@ public class BasicTest extends UnitTest {
         ingredients.add(basquaise);
         new Recipe(bob, "Poulet basquaise", DishCategory.Plat, 30, 60, 4, ingredients, "Préparation complète").save();
         
-        // Test that the post has been created
+        // Test that the recipe has been created
         assertEquals(1, Recipe.count());
         
-        // Retrieve all posts created by Bob
+        // Retrieve all recipes created by Bob
         List<Recipe> bobRecipes = Recipe.find("byAuthor", bob).fetch();
         
         // Tests
@@ -66,7 +66,7 @@ public class BasicTest extends UnitTest {
         // Create a new user and save it
         User jeff = new User("jeff@gmail.com", "Jeff33", "secret").save();
      
-        // Create a new post
+        // Create a new recipe
         List<Ingredient> ingredients = new ArrayList<Ingredient>();
         Ingredient poulet = new Ingredient("poulet").save();
         ingredients.add(poulet);
@@ -108,7 +108,7 @@ public class BasicTest extends UnitTest {
         // Create a new user and save it
         User tom = new User("tom@gmail.com", "Tom33", "secret").save();
         
-        // Create a new post
+        // Create a new recipe
         List<Ingredient> ingredients = new ArrayList<Ingredient>();
         Ingredient poulet = new Ingredient("poulet").save();
         ingredients.add(poulet);
@@ -125,7 +125,7 @@ public class BasicTest extends UnitTest {
         assertEquals(1, Recipe.count());
         assertEquals(2, Comment.count());
      
-        // Retrieve Bob's post
+        // Retrieve Bob's recipe
         bobRecipe = Recipe.find("byAuthor", bob).first();
         assertNotNull(bobRecipe);
      
@@ -133,13 +133,37 @@ public class BasicTest extends UnitTest {
         assertEquals(2, bobRecipe.comments.size());
         assertEquals("Jeff33", bobRecipe.comments.get(0).author.login);
         
-        // Delete the post
+        // Delete the recipe
         bobRecipe.delete();
         
         // Check that all comments have been deleted
         assertEquals(3, User.count());
         assertEquals(0, Recipe.count());
         assertEquals(0, Comment.count());
+    }
+    
+    @Test
+    public void fullTest() {
+        Fixtures.loadModels("data.yml");
+     
+        // Count things
+        assertEquals(2, User.count());
+        assertEquals(1, Recipe.count());
+        assertEquals(2, Comment.count());
+     
+        // Try to connect as users
+        assertNotNull(User.connect("Bobby38", "secret"));
+        assertNotNull(User.connect("Jeff33", "secret"));
+        assertNull(User.connect("Jeff33", "badpassword"));
+        assertNull(User.connect("Tom", "secret"));
+     
+        // Find all of Bob's recipes
+        List<Recipe> bobRecipe = Recipe.find("author.login", "Bobby38").fetch();
+        assertEquals(1, bobRecipe.size());
+     
+        // Find all comments related to Bob's recipes
+        List<Comment> bobRecipeComments = Comment.find("recipe.author.login", "Bobby38").fetch();
+        assertEquals(2, bobRecipeComments.size());
     }
 
 }
