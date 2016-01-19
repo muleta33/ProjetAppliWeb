@@ -19,3 +19,23 @@
 </ul>
 
 #{display recipe:recipe, as:'full' /}
+
+<h3>Post a comment</h3>
+ 
+#{form @Application.postComment(recipe.id)}
+    <p>
+        <label for="login">Your login: </label>
+        <input type="text" name="login" id="login" />
+    </p>
+    <p>
+        <label for="login">Rating: </label>
+        <input type="range" name="rating" id="rating" min="0" max="5" />
+    </p>
+    <p>
+        <label for="content">Your message: </label>
+        <textarea name="content" id="content"></textarea>
+    </p>
+    <p>
+        <input type="submit" value="Submit your comment" />
+    </p>
+#{/form}
