@@ -17,6 +17,7 @@ public class Comment extends Model {
     
     @Lob
     @Required
+    @MaxSize(10000)
     public String content;
     
     @Required
