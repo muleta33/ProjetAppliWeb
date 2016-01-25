@@ -1,3 +1,10 @@
 #{extends 'admin.html' /}
- 
-Welcome ${user}!
+
+#{if userRecipes.size()}
+    <div class="recipes">
+        #{list items:userRecipes, as:'recipe'}
+            #{display recipe:recipe, as:'teaser' /}
+        #{/list}
+    </div>
+    
+#{/if}

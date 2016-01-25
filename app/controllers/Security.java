@@ -16,4 +16,11 @@ public class Security extends controllers.Secure.Security {
         Admin.index();
     }
     
+    static boolean check(String profile) {
+        if("admin".equals(profile)) {
+            return User.find("byLogin", connected()).<User>first().isAdmin;
+        }
+        return false;
+    }
+    
 }

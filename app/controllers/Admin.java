@@ -16,9 +16,14 @@ public class Admin extends Controller {
     static void setConnectedUser() {
         if(Security.isConnected()) {
             User user = User.find("byLogin", Security.connected()).first();
+            List<Recipe> userRecipes = Recipe.find("select distinct r from Recipe r join r.author as a where a.login = ?", user.login).fetch();
             renderArgs.put("user", user.login);
+            // order by postedAt desc
+            renderArgs.put("userRecipes", userRecipes);
         }
     }
+    
+    
  
     public static void index() {
         render();
