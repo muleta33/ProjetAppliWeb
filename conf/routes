@@ -11,6 +11,9 @@ GET     /recipes/{id}                             Application.show
 # Specify a custom path for the Application.postComment action
 POST    /recipes/{recipeId}/comments                Application.postComment
 
+# Specify a custom path for the Application.captcha action
+GET     /captcha                                Application.captcha
+
 # Ignore favicon requests
 GET     /favicon.ico                            404
 
