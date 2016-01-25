@@ -5,11 +5,16 @@
 # Home page
 GET     /                                       Application.index
 
+# Import CRUD routes
+*      /admin              						module:crud
+
 # Specify a custom path for the Application.show action
-GET     /recipes/{id}                             Application.show
+GET     /recipes/{<[0-9]+>id}                   Application.show
+
+GET     /recipes/{tag}                    		Application.listTagged
 
 # Specify a custom path for the Application.postComment action
-POST    /recipes/{recipeId}/comments                Application.postComment
+POST    /recipes/{recipeId}/comments            Application.postComment
 
 # Specify a custom path for the Application.captcha action
 GET     /captcha                                Application.captcha

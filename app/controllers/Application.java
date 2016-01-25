@@ -54,5 +54,10 @@ public class Application extends Controller {
         Cache.set(id, code, "10mn");
         renderBinary(captcha);
     }
+    
+    public static void listTagged(String tag) {
+        List<Recipe> recipes = Recipe.findTaggedWith(tag);
+        render(tag, recipes);
+    }
 
 }

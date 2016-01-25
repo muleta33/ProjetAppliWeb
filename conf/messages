@@ -1,3 +1,22 @@
 # You can specialize this file for each language.
 # For example, for French create a messages.fr file
 #
+
+postedAt=Posted at
+rating=Rating
+content=Content
+author=Author
+recipe=Recipe
+description=Description
+title=Title
+category=Category
+preparationTime=Preparation time
+cookingTime=Cooking time
+numberOfPersons=Number of persons
+ingredients=Ingredients
+tags=Tags
+name=Name
+email=Email
+login=Login
+password=Password
+isAdmin=User is admin

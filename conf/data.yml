@@ -16,6 +16,12 @@ Ingredient(firstIngredient):
 
 Ingredient(secondIngredient):
     description:       le deuxième ingrédient
+    
+Tag(firstTag):
+    name:           Ingrédient1
+ 
+Tag(secondTag):
+    name:           Ingrédient2
 
 Recipe(firstBobRecipe):
     postedAt:          2016-01-14
@@ -28,6 +34,9 @@ Recipe(firstBobRecipe):
     ingredients:
         - firstIngredient
         - secondIngredient
+    tags:
+        - firstTag
+        - secondTag
     content:            >
                         On mélange tout et c'est prêt.
 
