@@ -1,29 +1,26 @@
-<!DOCTYPE html >
+<!DOCTYPE html>
 <html>
     <head>
-        <title>#{get 'title' /}</title>		
+        <title>Administration</title>		
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        #{get 'moreStyles' /}	
         <link rel="stylesheet" type="text/css" media="screen" 
-            href="@{'/public/stylesheets/main.css'}" />
+                href="@{'/public/stylesheets/main.css'}" />
         <link rel="shortcut icon" type="image/png" 
-            href="@{'/public/images/favicon.png'}" />
+                href="@{'/public/images/favicon.png'}" />
+        <script src="@{'/public/javascripts/jquery-1.6.4.min.js'}"></script>
     </head>
-    <body>
+    <body id="admin">
         
         <div id="header">
             <div id="logo">
-                Cooking Star.
+                yabe. <span>administration</span>
             </div>
             <ul id="tools">
                 <li>
-                    <a href="@{Admin.index()}">Log in to write something</a>
+                    <a href="@{Secure.logout()}">Log out</a>
                 </li>
             </ul>
-            <div id="title">
-                <span class="about">About this application</span>
-                <h1><a href="@{Application.index()}">${applicationTitle}</a></h1>
-                <h2>${applicationBaseline}</h2>
-            </div>
         </div>
         
         <div id="main">
