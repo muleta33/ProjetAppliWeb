@@ -16,6 +16,14 @@
                 #{/if}
             </span>
         #{/if}
+        #{elseif _recipe.tags}
+    		<span class="recipe-tags">
+        		- Tagged
+        		#{list items:_recipe.tags, as:'tag'}
+            		<a href="@{Application.listTagged(tag.name)}">${tag}</a>${tag_isLast ? '' : ', '}
+        		#{/list}
+    		</span>
+		#{/elseif}
     </div>
     #{if _as != 'teaser'}
         <div class="recipe-content">

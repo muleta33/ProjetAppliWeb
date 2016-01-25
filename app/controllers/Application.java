@@ -34,5 +34,10 @@ public class Application extends Controller {
         recipe.addComment(user, content, rating);
         show(recipeId);
     }
+    
+    public static void listTagged(String tag) {
+        List<Recipe> recipes = Recipe.findTaggedWith(tag);
+        render(tag, recipes);
+    }
 
 }

@@ -5,8 +5,13 @@
 # Home page
 GET     /                                       Application.index
 
+# Import CRUD routes
+*      /admin              						module:crud
+
 # Specify a custom path for the Application.show action
-GET     /posts/{id}                             Application.show
+GET     /recipes/{<[0-9]+>id}                   Application.show
+
+GET     /recipes/{tag}                    		Application.listTagged
 
 # Ignore favicon requests
 GET     /favicon.ico                            404

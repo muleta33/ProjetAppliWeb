@@ -28,7 +28,7 @@ public class BasicTest extends UnitTest {
         // Create a new user and save it
         User bob = new User("bob@gmail.com", "Bob", "secret").save();
         
-        // Create a new post
+        // Create a new Recipe
         List<Ingredient> ingredients = new ArrayList<Ingredient>();
         Ingredient poulet = new Ingredient("poulet").save();
         ingredients.add(poulet);
@@ -59,7 +59,7 @@ public class BasicTest extends UnitTest {
     }
     
     @Test
-    public void postComments() {
+    public void RecipeComments() {
         // Create a new user and save it
         User bob = new User("bob@gmail.com", "Bobby38", "secret").save();
         
@@ -74,7 +74,7 @@ public class BasicTest extends UnitTest {
         ingredients.add(basquaise);
         Recipe bobRecipe = new Recipe(bob, "My first recipe", DishCategory.Plat, 12, 25, 2, ingredients, "Blabla").save();
      
-        // Post a first comment
+        // Recipe a first comment
         new Comment(bobRecipe, jeff, "Nice recipe", 5).save();
         new Comment(bobRecipe, bob, "Thanks !", 5).save();
      
@@ -116,7 +116,7 @@ public class BasicTest extends UnitTest {
         ingredients.add(basquaise);
         Recipe bobRecipe = new Recipe(bob, "Poulet basquaise", DishCategory.Plat, 12, 25, 2, ingredients, "Blabla").save();
         
-        // Post a first comment
+        // Recipe a first comment
         bobRecipe.addComment(jeff, "Tested", 4);
         bobRecipe.addComment(tom, "Tested", 4);
      
@@ -170,5 +170,45 @@ public class BasicTest extends UnitTest {
         List<Comment> bobRecipeComments = Comment.find("recipe.author.login", "Bobby38").fetch();
         assertEquals(2, bobRecipeComments.size());
     }
-
+    
+    @Test
+    public void testTags() {
+        // Create a new user and save it
+        User bob = new User("bob@gmail.com", "secret", "Bob").save();
+     
+        // Create a new recipe
+        List<Ingredient> ingredients = new ArrayList<Ingredient>();
+        Ingredient poulet = new Ingredient("poulet").save();
+        ingredients.add(poulet);
+        Ingredient basquaise = new Ingredient("basquaise").save();
+        ingredients.add(basquaise);
+        Recipe bobRecipe = new Recipe(bob, "Poulet basquaise", DishCategory.Plat, 12, 25, 2, ingredients, "Blabla").save();
+        // Create a new recipe
+        Ingredient epices = new Ingredient("épices").save();
+        ingredients.add(epices);
+        Recipe anotherBobRecipe = new Recipe(bob, "Poulet basquaise épicé", DishCategory.Plat, 12, 25, 2, ingredients, "Blabla").save();
+     
+        // Well
+        assertEquals(0, Recipe.findTaggedWith("poulet").size());
+     
+        // Tag it now
+        bobRecipe.tagItWith("poulet").tagItWith("other").save();
+        anotherBobRecipe.tagItWith("poulet").tagItWith("épices").save();
+     
+        // Check
+        assertEquals(2, Recipe.findTaggedWith("poulet").size());
+        assertEquals(1, Recipe.findTaggedWith("épices").size());
+        assertEquals(1, Recipe.findTaggedWith("poulet", "épices").size());
+        assertEquals(1, Recipe.findTaggedWith("poulet", "other").size());
+        assertEquals(0, Recipe.findTaggedWith("poulet", "other", "épices").size());
+        assertEquals(0, Recipe.findTaggedWith("other", "épices").size());
+        
+        // Check tag cloud
+        List<Map> cloud = Tag.getCloud();
+        assertEquals(
+            "[{pound=1, tag=other}, {pound=2, tag=poulet}, {pound=1, tag=épices}]",
+            cloud.toString()
+        );
+    }
+    
 }

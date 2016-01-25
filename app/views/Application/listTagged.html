@@ -1,0 +1,22 @@
+#{extends 'main.html' /}
+#{set title:'Recipes tagged with ' + tag /}
+ 
+*{********* Title ********* }*
+ 
+#{if recipes.size() > 1}
+   <h3>There are ${recipes.size()} recipes tagged '${tag}'</h3>
+#{/if}
+#{elseif recipes}
+    <h3>There is 1 recipe tagged '${tag}'</h3>
+#{/elseif}
+#{else}
+    <h3>No recipe tagged '${tag}'</h3>
+#{/else}
+ 
+*{********* Recipes list *********}*
+ 
+<div class="older-recipes">
+    #{list items:recipes, as:'recipe'}
+        #{display recipe:recipe, as:'teaser' /}
+    #{/list}
+</div>

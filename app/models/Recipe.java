@@ -5,18 +5,32 @@ import java.util.*;
 import javax.persistence.*;
 
 import play.db.jpa.*;
+import play.data.validation.*;
 
 @Entity
 public class Recipe extends Model {
 
+    @Required
 	public String title;
+    
+    @Required
     public Date postedAt;
+    
+    @Required
     public DishCategory category;
+    
     public float rating;
+    
+    @Required
     public int preparationTime;
+    
+    @Required
     public int cookingTime;
+    
+    @Required
     public int numberOfPersons;
     
+    @Required
     @ManyToMany
     public List<Ingredient> ingredients;
     
@@ -24,10 +38,16 @@ public class Recipe extends Model {
     public List<Comment> comments;
 
     @Lob
+    @Required
+    @MaxSize(10000)
     public String content;
     
+    @Required
     @ManyToOne
     public User author;
+    
+    @ManyToMany(cascade=CascadeType.PERSIST)
+    public Set<Tag> tags;
     
     public Recipe(User author, String title, DishCategory category, int preparationTime, int cookingTime, int numberOfPersons, 
                   List<Ingredient> ingredients, String content) {
@@ -40,6 +60,7 @@ public class Recipe extends Model {
         this.numberOfPersons = numberOfPersons;
         this.ingredients = new ArrayList<Ingredient>(ingredients);
         this.comments = new ArrayList<Comment>();
+        this.tags = new TreeSet<Tag>();
         this.content = content;
         this.postedAt = new Date();
     }
@@ -66,6 +87,25 @@ public class Recipe extends Model {
 
     public Recipe next() {
         return Recipe.find("postedAt > ? order by postedAt asc", postedAt).first();
+    }
+    
+    public Recipe tagItWith(String name) {
+        tags.add(Tag.findOrCreateByName(name));
+        return this;
+    }
+    
+    public static List<Recipe> findTaggedWith(String tag) {
+        return Recipe.find("select distinct p from Recipe p join p.tags as t where t.name = ?", tag).fetch();
+    }
+    
+    public static List<Recipe> findTaggedWith(String... tags) {
+        return Recipe.find(
+                "select distinct r from Recipe r join r.tags as t where t.name in (:tags) group by r.id having count(t.id) = :size"
+        ).bind("tags", tags).bind("size", tags.length).fetch();
+    }
+    
+    public String toString() {
+        return title;
     }
     
 }
