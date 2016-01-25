@@ -18,11 +18,22 @@
     #{/if}
 </ul>
 
+#{if flash.success}
+    <p class="success">${flash.success}</p>
+#{/if}
+
 #{display recipe:recipe, as:'full' /}
 
 <h3>Post a comment</h3>
  
 #{form @Application.postComment(recipe.id)}
+
+    #{ifErrors}
+        <p class="error">
+            Comment field is required!
+        </p>
+    #{/ifErrors}
+    
     <p>
         <label for="login">Your login: </label>
         <input type="text" name="login" id="login" />

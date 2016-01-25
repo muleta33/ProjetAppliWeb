@@ -13,6 +13,9 @@ GET     /recipes/{<[0-9]+>id}                   Application.show
 
 GET     /recipes/{tag}                    		Application.listTagged
 
+# Specify a custom path for the Application.postComment action
+POST    /recipes/{recipeId}/comments            Application.postComment
+
 # Ignore favicon requests
 GET     /favicon.ico                            404
 
