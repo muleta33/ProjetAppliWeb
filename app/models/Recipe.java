@@ -96,7 +96,7 @@ public class Recipe extends Model {
     }
     
     public static List<Recipe> findTaggedWith(String tag) {
-        return Recipe.find("select distinct p from Recipe p join p.tags as t where t.name = ?", tag).fetch();
+        return Recipe.find("select distinct r from Recipe r join r.tags as t where t.name = ?", tag).fetch();
     }
     
     public static List<Recipe> findTaggedWith(String... tags) {

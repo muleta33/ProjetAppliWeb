@@ -10,6 +10,7 @@ User(jeff):
     email:              jeff@gmail.com
     login:              Jeff33 
     password:           secret
+    isAdmin:            true
 
 Ingredient(firstIngredient):
     description:       le premier ingrédient
