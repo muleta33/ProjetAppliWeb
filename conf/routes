@@ -6,7 +6,10 @@
 GET     /                                       Application.index
 
 # Specify a custom path for the Application.show action
-GET     /posts/{id}                             Application.show
+GET     /recipes/{id}                             Application.show
+
+# Specify a custom path for the Application.postComment action
+POST    /recipes/{recipeId}/comments                Application.postComment
 
 # Ignore favicon requests
 GET     /favicon.ico                            404

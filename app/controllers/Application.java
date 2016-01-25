@@ -3,6 +3,7 @@ package controllers;
 import play.*;
 import play.mvc.*;
 import play.Play;
+import play.data.validation.*;
 
 import java.util.*;
 
@@ -27,11 +28,15 @@ public class Application extends Controller {
         render(recipe);
     }
 
-    public static void postComment(Long recipeId, String login, String content, int rating) {
+    public static void postComment(Long recipeId, String login, @Required String content, int rating) {
         Recipe recipe = Recipe.findById(recipeId);
+        if (validation.hasErrors()) {
+            render("Application/show.html", recipe);
+        }
         // TODO: vérifier que l'utilisateur est connecté pour poster un commentaire
         User user = User.find("byLogin", login).first();
         recipe.addComment(user, content, rating);
+        flash.success("Thanks for posting!");
         show(recipeId);
     }
 
