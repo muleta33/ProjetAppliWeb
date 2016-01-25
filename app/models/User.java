@@ -2,9 +2,13 @@ package models;
 
 import java.util.*;
 import javax.persistence.*;
- 
+
+import org.h2.store.WriterThread;
+
+import groovy.ui.Console;
 import play.db.jpa.*;
 import play.data.validation.*;
+import play.libs.Crypto;
  
 @Entity
 public class User extends Model {
@@ -23,6 +27,7 @@ public class User extends Model {
     public User(String email, String login, String password) {
         this.email = email;
         this.login = login;
+        //this.password = Crypto.encryptAES(Crypto.passwordHash(password));
         this.password = password;
     }
     
