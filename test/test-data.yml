@@ -16,12 +16,45 @@ Ingredient(firstIngredient):
 
 Ingredient(secondIngredient):
     description:       le deuxième ingrédient
+    
+DishCategory(salade):
+    name:               Salade
+    subCategories:      []
+    
+DishCategory(entreeChaude):
+    name:               Entrée chaude
+    subCategories:      []
+    
+DishCategory(entree):
+    name:               Entrée
+    subCategories:
+        - salade
+        - entreeChaude
+    
+DishCategory(viandeSauce):
+    name:               Viande en sauce
+    subCategories:      []
+    
+DishCategory(accompagnement):
+    name:               Accompagnement
+    subCategories:      []
+    
+DishCategory(platComplet):
+    name:               Plat complet
+    subCategories:      []
+    
+DishCategory(plat):
+    name:               Plat
+    subCategories:
+        - viandeSauce
+        - accompagnement
+        - platComplet
 
 Recipe(firstBobRecipe):
     postedAt:          2016-01-14
     author:            bob
     title:             My first recipe
-    category:          Plat
+    category:          plat
     preparationTime:   25
     cookingTime:       30
     numberOfPersons:   2

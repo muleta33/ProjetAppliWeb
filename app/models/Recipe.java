@@ -17,6 +17,7 @@ public class Recipe extends Model {
     public Date postedAt;
     
     @Required
+    @ManyToOne
     public DishCategory category;
     
     public float rating;

@@ -34,7 +34,8 @@ public class BasicTest extends UnitTest {
         ingredients.add(poulet);
         Ingredient basquaise = new Ingredient("basquaise").save();
         ingredients.add(basquaise);
-        new Recipe(bob, "Poulet basquaise", DishCategory.Plat, 30, 60, 4, ingredients, "Préparation complète").save();
+        DishCategory category = new DishCategory("Plat", new ArrayList<DishCategory>()).save();
+        new Recipe(bob, "Poulet basquaise", category, 30, 60, 4, ingredients, "Préparation complète").save();
         
         // Test that the recipe has been created
         assertEquals(1, Recipe.count());
@@ -48,7 +49,7 @@ public class BasicTest extends UnitTest {
         assertNotNull(firstRecipe);
         assertEquals(bob, firstRecipe.author);
         assertEquals("Poulet basquaise", firstRecipe.title);
-        assertEquals(DishCategory.Plat, firstRecipe.category);
+        assertEquals(category.name, firstRecipe.category.name);
         assertEquals(30, firstRecipe.preparationTime);
         assertEquals(60, firstRecipe.cookingTime);
         assertEquals(4, firstRecipe.numberOfPersons);
@@ -72,7 +73,8 @@ public class BasicTest extends UnitTest {
         ingredients.add(poulet);
         Ingredient basquaise = new Ingredient("basquaise").save();
         ingredients.add(basquaise);
-        Recipe bobRecipe = new Recipe(bob, "My first recipe", DishCategory.Plat, 12, 25, 2, ingredients, "Blabla").save();
+        DishCategory category = new DishCategory("Plat", new ArrayList<DishCategory>()).save();
+        Recipe bobRecipe = new Recipe(bob, "My first recipe", category, 12, 25, 2, ingredients, "Blabla").save();
      
         // Recipe a first comment
         new Comment(bobRecipe, jeff, "Nice recipe", 5).save();
@@ -114,7 +116,8 @@ public class BasicTest extends UnitTest {
         ingredients.add(poulet);
         Ingredient basquaise = new Ingredient("basquaise").save();
         ingredients.add(basquaise);
-        Recipe bobRecipe = new Recipe(bob, "Poulet basquaise", DishCategory.Plat, 12, 25, 2, ingredients, "Blabla").save();
+        DishCategory category = new DishCategory("Plat", new ArrayList<DishCategory>()).save();
+        Recipe bobRecipe = new Recipe(bob, "Poulet basquaise", category, 12, 25, 2, ingredients, "Blabla").save();
         
         // Recipe a first comment
         bobRecipe.addComment(jeff, "Tested", 4);
@@ -148,6 +151,8 @@ public class BasicTest extends UnitTest {
      
         // Count things
         assertEquals(2, User.count());
+        assertEquals(2, Ingredient.count());
+        assertEquals(7, DishCategory.count());
         assertEquals(1, Recipe.count());
         assertEquals(2, Comment.count());
      
@@ -182,11 +187,12 @@ public class BasicTest extends UnitTest {
         ingredients.add(poulet);
         Ingredient basquaise = new Ingredient("basquaise").save();
         ingredients.add(basquaise);
-        Recipe bobRecipe = new Recipe(bob, "Poulet basquaise", DishCategory.Plat, 12, 25, 2, ingredients, "Blabla").save();
+        DishCategory category = new DishCategory("Plat", new ArrayList<DishCategory>()).save();
+        Recipe bobRecipe = new Recipe(bob, "Poulet basquaise", category, 12, 25, 2, ingredients, "Blabla").save();
         // Create a new recipe
         Ingredient epices = new Ingredient("épices").save();
         ingredients.add(epices);
-        Recipe anotherBobRecipe = new Recipe(bob, "Poulet basquaise épicé", DishCategory.Plat, 12, 25, 2, ingredients, "Blabla").save();
+        Recipe anotherBobRecipe = new Recipe(bob, "Poulet basquaise épicé", category, 12, 25, 2, ingredients, "Blabla").save();
      
         // Well
         assertEquals(0, Recipe.findTaggedWith("poulet").size());
