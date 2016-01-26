@@ -70,7 +70,6 @@ Recipe(firstBobRecipe):
         - secondIngredient
     tags:
         - firstTag
-        - secondTag
     content:            >
                         On mélange tout et c'est prêt.
 
