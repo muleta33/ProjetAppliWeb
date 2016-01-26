@@ -27,8 +27,7 @@ public class User extends Model {
     public User(String email, String login, String password) {
         this.email = email;
         this.login = login;
-        //this.password = Crypto.encryptAES(Crypto.passwordHash(password));
-        this.password = password;
+        this.password = Crypto.passwordHash(password);
     }
     
     public static User connect(String login, String password) {
