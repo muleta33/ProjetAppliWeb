@@ -26,9 +26,11 @@
 		<div id="main">
 		    
 		    <ul id="adminMenu">
-		        <li class="${request.controller == 'Admin' ? 'selected' : ''}">
-		            <a href="@{Admin.index()}">My recipes</a>
+		        #{secure.check 'connected'}
+		        <li class="${request.controller == 'MyRecipes' ? 'selected' : ''}">
+		            <a href="@{MyRecipes.list()}">My recipes</a>
 		        </li>
+		        #{/secure.check}
 		        #{secure.check 'admin'}
 		            <li class="${request.controller == 'Recipes' ? 'selected' : ''}">
 		                <a href="@{Recipes.list()}">Recipes</a>

@@ -20,6 +20,9 @@ public class Security extends controllers.Secure.Security {
         if("admin".equals(profile)) {
             return User.find("byLogin", connected()).<User>first().isAdmin;
         }
+        else if ("connected".equals(profile)) {
+            return !User.find("byLogin", connected()).<User>fetch().isEmpty();
+        }
         return false;
     }
     
