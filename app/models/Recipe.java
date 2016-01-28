@@ -105,6 +105,10 @@ public class Recipe extends Model {
         ).bind("tags", tags).bind("size", tags.length).fetch();
     }
     
+    public static List<Recipe> findCategorizedWith(String dishCategory) {
+        return Recipe.find("select distinct r from Recipe r join r.category.name as c where c.name = ?", dishCategory).fetch();
+    }
+    
     public String toString() {
         return title;
     }

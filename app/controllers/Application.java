@@ -59,5 +59,28 @@ public class Application extends Controller {
         List<Recipe> recipes = Recipe.findTaggedWith(tag);
         render(tag, recipes);
     }
+    
+    public static void form() {
+        List<DishCategory> dishCategories = DishCategory.find("order by name asc").fetch();
+        render(dishCategories);
+    }
+ 
+    public static void save(String dishCategories) {
+        List<DishCategory> dishCategoriesList = new ArrayList<DishCategory>();
+        // Fill dishCategories list with each selected dishCategory
+        for(String dishCategory : dishCategories.split("\\s+")) {
+            if(dishCategory.trim().length() > 0) {
+                dishCategoriesList.add(DishCategory.findOrCreateByName(dishCategory));
+            }
+        }
+        // A changer
+        listCategorized(dishCategoriesList.get(0).name);
+    }
+    
+    public static void listCategorized(String dishCategory) {
+        List<Recipe> recipes = Recipe.findCategorizedWith(dishCategory);
+        render(dishCategory, recipes);
+    }
+
 
 }

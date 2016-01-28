@@ -1,0 +1,14 @@
+#{extends 'main.html' /}
+#{set title:'Recipes categorized as ' + dishCategory /}
+
+#{if recipes.size()}
+    
+    <div class="recipes">
+        <h3>Recipes <span class="from">from this application</span></h3>
+    
+        #{list items:recipes, as:'recipe'}
+            #{display recipe:recipe, as:'teaser' /}
+        #{/list}
+    </div>
+    
+#{/if}

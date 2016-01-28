@@ -1,6 +1,11 @@
 #{extends 'main.html' /}
 #{set title:'Home' /}
- 
+
+<p id="searchRecipes" >
+    <a href="@{form()}"><span>+</span> Search recipes by category</a>
+</p>
+
+
 #{if frontRecipe}
     
     #{display recipe:frontRecipe, as:'home' /}
