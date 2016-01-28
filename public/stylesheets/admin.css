@@ -1,0 +1,9 @@
+.tags, .ingredients {
+	 cursor: pointer;
+     margin-right: 15px;
+}
+
+.selected {
+	background: #222;
+    color: #fff;
+}

@@ -7,7 +7,7 @@ import play.db.jpa.*;
 import play.data.validation.*;
 
 @Entity
-public class Ingredient extends Model {
+public class Ingredient extends Model implements Comparable<Ingredient> {
 
     @Required
     public String description;
@@ -18,6 +18,18 @@ public class Ingredient extends Model {
     
     public String toString() {
         return description;
+    }
+    
+    public int compareTo(Ingredient otherIngredient) {
+        return description.compareTo(otherIngredient.description);
+    }
+    
+    public static Ingredient findOrCreateByName(String description) {
+        Ingredient ingredient = Ingredient.find("byDescription", description).first();
+        if(ingredient == null) {
+            ingredient = new Ingredient(description);
+        }
+        return ingredient;
     }
     
 }

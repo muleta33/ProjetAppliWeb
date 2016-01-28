@@ -10,7 +10,7 @@
     </div>
 
     <div id="crudListTable">
-        #{crud.table fields:['title', 'category', 'author']}
+        #{crud.table fields:['login', 'email']}
             #{crud.custom 'content'}
                 <a href="@{Comments.show(object.id)}">
                     ${object.content.length() > 50 ? object.content[0..50] + '…' : object.content}
