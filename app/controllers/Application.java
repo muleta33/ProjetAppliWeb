@@ -46,7 +46,8 @@ public class Application extends Controller {
     public static void show(Long id) {
         Recipe recipe = Recipe.findById(id);
         String randomID = Codec.UUID();
-        render(recipe, randomID);
+        User user = User.find("byLogin", Security.connected()).first();
+        render(recipe, randomID, user);
     }
 
     public static void postComment(Long recipeId, String login, 
@@ -75,24 +76,8 @@ public class Application extends Controller {
     
     public static void listTagged(String tag) {
         List<Recipe> recipes = Recipe.findTaggedWith(tag);
-        render(tag, recipes);
+        User user = User.find("byLogin", Security.connected()).first();
+        render(tag, recipes, user);
     }
-    
-    /*public static void listCategorized(String dishCategoriesText)
-    {
-        List<Recipe> recipes = new ArrayList<Recipe>();
-        for(String dishCategory : dishCategoriesText.split("   ")) {
-            if(dishCategory.trim().length() > 0) {
-                List<Recipe> tempRecipes = Recipe.findCategorizedWith(dishCategory);
-                for (Recipe recipe : tempRecipes)
-                {
-                    if (!recipes.contains(recipe))
-                        recipes.add(recipe);
-                }
-            }
-        }
-        List<DishCategory> dishCategories = DishCategory.find("order by name asc").fetch();
-        render(dishCategories, recipes);
-    }*/
 
 }
