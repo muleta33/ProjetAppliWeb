@@ -9,6 +9,10 @@
             Please correct these errors.
         </p>
     #{/ifErrors}
+    
+    #{if flash.error}
+        <p class="error">${flash.error}</p>
+    #{/if}
      
     <p>
         #{field 'login'}

@@ -17,6 +17,7 @@ public class User extends Model {
     @Required
     public String email;
     
+    @Required
     @Column(unique = true)
     public String login;
     
@@ -33,7 +34,8 @@ public class User extends Model {
     }
     
     public static User connect(String login, String password) {
-        return find("byLoginAndPassword", login, password).first();
+        User user = find("byLoginAndPassword", login, password).first();
+        return user;
     }
     
     public String toString() {
