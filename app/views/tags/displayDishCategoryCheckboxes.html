@@ -1,0 +1,14 @@
+*{ Display a dishCategory checkbox and all its sub-categories }*
+
+<input type="checkbox" name="${_dishCategory}" id="${_dishCategory}">
+<label for="${_dishCategory}">${_dishCategory.name}</label>
+
+#{if !_dishCategory.subCategories.isEmpty()}
+	<ul>
+		#{list items:_dishCategory.subCategories, as:'dishCategory'}
+			<li>
+				#{displayDishCategoryCheckboxes dishCategory:dishCategory /}
+			</li>
+		#{/list}
+	</ul>
+#{/if}

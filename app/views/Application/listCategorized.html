@@ -1,9 +1,9 @@
 #{extends 'main.html' /}
-#{set title:'Home' /}
+#{set title:'Recipes categorized' /}
 
 <h3>Select categories</h3>
  
-#{form @index()}
+#{form @listCategorized()}
  
     #{ifErrors}
         <p class="error">
@@ -30,10 +30,10 @@
     
 #{/form}
 
-#{if recipes.size()}
-
+#{if recipes != null && recipes.size()}
+    
     <div class="recipes">
-        <h3>Most recent recipes <span class="from">from this application</span></h3>
+        <h3>Recipes <span class="from">from this application</span></h3>
     
         #{list items:recipes, as:'recipe'}
             #{display recipe:recipe, as:'teaser' /}
@@ -41,9 +41,3 @@
     </div>
     
 #{/if}
- 
-#{else}
-    <div class="empty">
-        There is currently nothing to read here.
-    </div>
-#{/else}

@@ -29,4 +29,12 @@ public class DishCategory extends Model {
         return name;
     }
     
+    public static DishCategory findOrCreateByName(String name) {
+        DishCategory dishCategory = DishCategory.find("byName", name).first();
+        if(dishCategory == null) {
+            dishCategory = new DishCategory(name, new ArrayList<DishCategory>());
+        }
+        return dishCategory;
+    }
+    
 }

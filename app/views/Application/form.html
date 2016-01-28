@@ -1,9 +1,9 @@
 #{extends 'main.html' /}
 #{set title:'Home' /}
-
+ 
 <h3>Select categories</h3>
  
-#{form @index()}
+#{form @listCategorized()}
  
     #{ifErrors}
         <p class="error">
@@ -33,7 +33,7 @@
 #{if recipes.size()}
 
     <div class="recipes">
-        <h3>Most recent recipes <span class="from">from this application</span></h3>
+        <h3>Recipes <span class="from">from this application</span></h3>
     
         #{list items:recipes, as:'recipe'}
             #{display recipe:recipe, as:'teaser' /}

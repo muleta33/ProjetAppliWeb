@@ -20,11 +20,27 @@ public class Application extends Controller {
         renderArgs.put("applicationBaseline", Play.configuration.getProperty("application.baseline"));
     }
     
-    public static void index() {
-        Recipe frontRecipe = Recipe.find("order by postedAt desc").first();
-        List<Recipe> olderRecipes = Recipe.find("order by postedAt desc").from(1).fetch(10);
+    public static void index(String dishCategoriesText) {
+        List<Recipe> recipes = new ArrayList<Recipe>();
+        if (dishCategoriesText != null)
+        {
+            for(String dishCategory : dishCategoriesText.split("   ")) {
+                if(dishCategory.trim().length() > 0) {
+                    List<Recipe> tempRecipes = Recipe.findCategorizedWith(dishCategory);
+                    for (Recipe recipe : tempRecipes)
+                    {
+                        if (!recipes.contains(recipe))
+                            recipes.add(recipe);
+                    }
+                }
+            }
+        }
+        else {
+            recipes = Recipe.find("order by postedAt desc").fetch(10);
+        }
+        List<DishCategory> dishCategories = DishCategory.find("order by name asc").fetch();
         User user = User.find("byLogin", Security.connected()).first();
-        render(frontRecipe, olderRecipes, user);
+        render(dishCategories, recipes, user);
     }
     
     public static void show(Long id) {
@@ -61,5 +77,22 @@ public class Application extends Controller {
         List<Recipe> recipes = Recipe.findTaggedWith(tag);
         render(tag, recipes);
     }
+    
+    /*public static void listCategorized(String dishCategoriesText)
+    {
+        List<Recipe> recipes = new ArrayList<Recipe>();
+        for(String dishCategory : dishCategoriesText.split("   ")) {
+            if(dishCategory.trim().length() > 0) {
+                List<Recipe> tempRecipes = Recipe.findCategorizedWith(dishCategory);
+                for (Recipe recipe : tempRecipes)
+                {
+                    if (!recipes.contains(recipe))
+                        recipes.add(recipe);
+                }
+            }
+        }
+        List<DishCategory> dishCategories = DishCategory.find("order by name asc").fetch();
+        render(dishCategories, recipes);
+    }*/
 
 }

@@ -63,7 +63,7 @@ Recipe(firstBobRecipe):
     postedAt:          2016-01-14
     author:            bob
     title:             My first recipe
-    category:          plat
+    category:          viandeSauce
     preparationTime:   25
     cookingTime:       30
     numberOfPersons:   2
