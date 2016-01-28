@@ -51,7 +51,7 @@ public class Recipe extends Model {
     public Set<Tag> tags;
     
     public Recipe(User author, String title, DishCategory category, int preparationTime, int cookingTime, int numberOfPersons, 
-                  List<Ingredient> ingredients, String content) {
+                  List<Ingredient> ingredients, Set<Tag> tags, String content) {
         this.author = author;
         this.title = title;
         this.category = category;
@@ -61,7 +61,7 @@ public class Recipe extends Model {
         this.numberOfPersons = numberOfPersons;
         this.ingredients = new ArrayList<Ingredient>(ingredients);
         this.comments = new ArrayList<Comment>();
-        this.tags = new TreeSet<Tag>();
+        this.tags = new TreeSet<Tag>(tags);
         this.content = content;
         this.postedAt = new Date();
     }

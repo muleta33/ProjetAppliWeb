@@ -1,39 +1,25 @@
 #{extends 'CRUD/layout.html' /}
-#{set title:messages.get('crud.show.title', type.modelName) /}
+#{set title:messages.get('crud.blank.title', type.modelName) /}
 
-<div id="crudShow" class="${type.name}">
+<div id="crudBlank" class="${type.name}">
 
-    <h2 id="crudShowTitle">&{'crud.show.title', type.modelName}</h2>
+    <h2 id="crudBlankTitle">&{'crud.blank.title', type.modelName}</h2>
 
     <div class="objectForm">
-    #{form action:@save(object._key()), enctype:'multipart/form-data'}
+    #{form action:@create(), enctype:'multipart/form-data'}
         #{crud.form}
             #{crud.custom 'postedAt'}
-                <label for="postedAt">
-                    &{'postedAt'}
-                </label>
-                <div class="post-date">
-                     <span id="date">
-                         ${object.postedAt.find()}
-                     </span> 
-                </div>
+
             #{/crud.custom}
             #{crud.custom 'author'}
-                <label for="author">
-                    &{'author'}
-                </label>
-                <div class="author-class">
-                     <span id="author">
-                         ${object.author}
-                     </span> 
-                </div>
+
             #{/crud.custom}
             #{crud.custom 'ingredients'}
                 <label for="ingredients">
                     &{'ingredients'}
                 </label>
                 <div class="ingredients-list">
-                    #{list object.ingredients.findAll(), as:'ingredient'}
+                    #{list object?.ingredients.findAll(), as:'ingredient'}
                        <span class="ingredients selected" id="i${ingredient.id}" onclick="toggle(this)">
                            ${ingredient}
                        </span>
@@ -52,45 +38,39 @@
                     
                 </div>
             #{/crud.custom}
-		    #{crud.custom 'tags'}
-		        <label for="tags">
-		            &{'tags'}
-		        </label>
-		        <div class="tags-list">
-		            #{list object.tags.findAll(), as:'tag'}
-		               <span class="tags selected" id="t${tag.id}" onclick="toggle(this)">
-		                   ${tag}
-		               </span>
-		               <!-- Hidden input for selecting/unselecting tags -->
-		               <input id="ht${tag.id}" type="hidden" name="${fieldName}" 
+            #{crud.custom 'tags'}
+                <label for="tags">
+                    &{'tags'}
+                </label>
+                <div class="tags-list">
+                    #{list object?.tags.findAll(), as:'tag'}
+                       <span class="tags selected" id="t${tag.id}" onclick="toggle(this)">
+                           ${tag}
+                       </span>
+                       <!-- Hidden input for selecting/unselecting tags -->
+                       <input id="ht${tag.id}" type="hidden" name="${fieldName}" 
                         value="${object.tags.contains(tag) ? tag.id : ''}" />
-		            #{/list}
-		            
-		            <!-- Input for adding a tag -->
-		            <span>
+                    #{/list}
+                    
+                    <!-- Input for adding a tag -->
+                    <span>
                         #{field 'tagName'}
                         <input type="text" name="${field.name}" 
                             value="${recipe?.tagName}" />
                         #{/field}
                     </span>
                     
-		        </div>
-		    #{/crud.custom}
+                </div>
+            #{/crud.custom}
         #{/crud.form}
-        
         <p class="crudButtons">
             <input type="submit" name="_save" value="&{'crud.save', type.modelName}" />
             <input type="submit" name="_saveAndContinue" value="&{'crud.saveAndContinue', type.modelName}" />
+            <input type="submit" name="_saveAndAddAnother" value="&{'crud.saveAndAddAnother', type.modelName}" />
         </p>
     #{/form}
     </div>
 
-    #{form @delete(object._key())}
-        <p class="crudDelete">
-            <input type="submit" value="&{'crud.delete', type.modelName}" />
-        </p>
-    #{/form}
-    
     <script type="text/javascript">
     var toggle = function(el) {
         $elem = $('#'+el.id);

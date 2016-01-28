@@ -12,7 +12,7 @@ public class Tag extends Model implements Comparable<Tag> {
     @Required
     public String name;
  
-    private Tag(String name) {
+    public Tag(String name) {
         this.name = name;
     }
  
