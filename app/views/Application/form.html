@@ -1,8 +1,9 @@
 #{extends 'main.html' /}
+#{set title:'Home' /}
  
 <h3>Select categories</h3>
  
-#{form @save()}
+#{form @listCategorized()}
  
     #{ifErrors}
         <p class="error">
@@ -17,15 +18,32 @@
 					#{displayDishCategoryCheckboxes dishCategory:dishCategory /}
 				</li>
 			#{/list}
-			#{field 'dishCategories'}
-				<input type="hidden" size="50" name="${field.name}"/>
-				faire avec script guide 7 pour écrire dans textbox et récupérer une string
+			#{field 'dishCategoriesText'}
+				<input type="text" size="50" id="${field.name}" name="${field.name}"/>
 			#{/field}
     	</ul>
 	</div>
-    
+	
     <p>
-        <input type="submit" value="Search recipes" />
+        <input type="submit" value="Search recipes"/>
     </p>
     
 #{/form}
+
+#{if recipes.size()}
+
+    <div class="recipes">
+        <h3>Recipes <span class="from">from this application</span></h3>
+    
+        #{list items:recipes, as:'recipe'}
+            #{display recipe:recipe, as:'teaser' /}
+        #{/list}
+    </div>
+    
+#{/if}
+ 
+#{else}
+    <div class="empty">
+        There is currently nothing to read here.
+    </div>
+#{/else}

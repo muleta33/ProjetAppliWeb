@@ -1,5 +1,6 @@
 // Apparently click is better chan change? Cuz IE?
 $(document).ready(function() {
+	
 $('input[type="checkbox"]').change(function(e) {
 
   var checked = $(this).prop("checked"),
@@ -48,4 +49,21 @@ if (all && checked) {
 
   checkSiblings(container);
 });
+
+$('input[type="checkbox"]').change(writeCheckedTextboxes);
 })
+
+function writeCheckedTextboxes() {
+	// Récupération de la textbox
+	$textField = $("#dishCategoriesText");
+	// On la vide
+	$textField.val("");
+	
+	$.each($(".dish-categories li input"), function(index, elem) 
+			{
+				if ($(elem).prop("checked")) {
+					// Si le checkbox est cochée, on ajoute l'identifiant de celle ci à la textbox
+					$textField.val($textField.val() + $(elem).prop("id") + "   ");
+				}
+			});
+}

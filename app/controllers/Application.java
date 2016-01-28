@@ -20,10 +20,26 @@ public class Application extends Controller {
         renderArgs.put("applicationBaseline", Play.configuration.getProperty("application.baseline"));
     }
     
-    public static void index() {
-        Recipe frontRecipe = Recipe.find("order by postedAt desc").first();
-        List<Recipe> olderRecipes = Recipe.find("order by postedAt desc").from(1).fetch(10);
-        render(frontRecipe, olderRecipes);
+    public static void index(String dishCategoriesText) {
+        List<Recipe> recipes = new ArrayList<Recipe>();
+        if (dishCategoriesText != null)
+        {
+            for(String dishCategory : dishCategoriesText.split("   ")) {
+                if(dishCategory.trim().length() > 0) {
+                    List<Recipe> tempRecipes = Recipe.findCategorizedWith(dishCategory);
+                    for (Recipe recipe : tempRecipes)
+                    {
+                        if (!recipes.contains(recipe))
+                            recipes.add(recipe);
+                    }
+                }
+            }
+        }
+        else {
+            recipes = Recipe.find("order by postedAt desc").fetch(10);
+        }
+        List<DishCategory> dishCategories = DishCategory.find("order by name asc").fetch();
+        render(dishCategories, recipes);
     }
     
     public static void show(Long id) {
@@ -60,27 +76,21 @@ public class Application extends Controller {
         render(tag, recipes);
     }
     
-    public static void form() {
-        List<DishCategory> dishCategories = DishCategory.find("order by name asc").fetch();
-        render(dishCategories);
-    }
- 
-    public static void save(String dishCategories) {
-        List<DishCategory> dishCategoriesList = new ArrayList<DishCategory>();
-        // Fill dishCategories list with each selected dishCategory
-        for(String dishCategory : dishCategories.split("\\s+")) {
+    /*public static void listCategorized(String dishCategoriesText)
+    {
+        List<Recipe> recipes = new ArrayList<Recipe>();
+        for(String dishCategory : dishCategoriesText.split("   ")) {
             if(dishCategory.trim().length() > 0) {
-                dishCategoriesList.add(DishCategory.findOrCreateByName(dishCategory));
+                List<Recipe> tempRecipes = Recipe.findCategorizedWith(dishCategory);
+                for (Recipe recipe : tempRecipes)
+                {
+                    if (!recipes.contains(recipe))
+                        recipes.add(recipe);
+                }
             }
         }
-        // A changer
-        listCategorized(dishCategoriesList.get(0).name);
-    }
-    
-    public static void listCategorized(String dishCategory) {
-        List<Recipe> recipes = Recipe.findCategorizedWith(dishCategory);
-        render(dishCategory, recipes);
-    }
-
+        List<DishCategory> dishCategories = DishCategory.find("order by name asc").fetch();
+        render(dishCategories, recipes);
+    }*/
 
 }

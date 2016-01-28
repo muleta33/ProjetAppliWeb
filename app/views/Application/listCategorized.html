@@ -1,7 +1,36 @@
 #{extends 'main.html' /}
-#{set title:'Recipes categorized as ' + dishCategory /}
+#{set title:'Recipes categorized' /}
 
-#{if recipes.size()}
+<h3>Select categories</h3>
+ 
+#{form @listCategorized()}
+ 
+    #{ifErrors}
+        <p class="error">
+            Please correct these errors.
+        </p>
+    #{/ifErrors}
+    
+    <div class="dish-categories">
+		<ul>
+			#{list items:dishCategories, as:'dishCategory'}
+				<li>
+					#{displayDishCategoryCheckboxes dishCategory:dishCategory /}
+				</li>
+			#{/list}
+			#{field 'dishCategoriesText'}
+				<input type="text" size="50" id="${field.name}" name="${field.name}"/>
+			#{/field}
+    	</ul>
+	</div>
+	
+    <p>
+        <input type="submit" value="Search recipes"/>
+    </p>
+    
+#{/form}
+
+#{if recipes != null && recipes.size()}
     
     <div class="recipes">
         <h3>Recipes <span class="from">from this application</span></h3>

@@ -1,26 +1,44 @@
 #{extends 'main.html' /}
 #{set title:'Home' /}
 
-<p id="searchRecipes" >
-    <a href="@{form()}"><span>+</span> Search recipes by category</a>
-</p>
+<h3>Select categories</h3>
+ 
+#{form @index()}
+ 
+    #{ifErrors}
+        <p class="error">
+            Please correct these errors.
+        </p>
+    #{/ifErrors}
+    
+    <div class="dish-categories">
+		<ul>
+			#{list items:dishCategories, as:'dishCategory'}
+				<li>
+					#{displayDishCategoryCheckboxes dishCategory:dishCategory /}
+				</li>
+			#{/list}
+			#{field 'dishCategoriesText'}
+				<input type="text" size="50" id="${field.name}" name="${field.name}"/>
+			#{/field}
+    	</ul>
+	</div>
+	
+    <p>
+        <input type="submit" value="Search recipes"/>
+    </p>
+    
+#{/form}
 
+#{if recipes.size()}
 
-#{if frontRecipe}
+    <div class="recipes">
+        <h3>Most recent recipes <span class="from">from this application</span></h3>
     
-    #{display recipe:frontRecipe, as:'home' /}
-    
-    #{if olderRecipes.size()}
-    
-        <div class="older-recipes">
-            <h3>Older recipes <span class="from">from this application</span></h3>
-        
-            #{list items:olderRecipes, as:'oldRecipe'}
-                #{display recipe:oldRecipe, as:'teaser' /}
-            #{/list}
-        </div>
-        
-    #{/if}
+        #{list items:recipes, as:'recipe'}
+            #{display recipe:recipe, as:'teaser' /}
+        #{/list}
+    </div>
     
 #{/if}
  
