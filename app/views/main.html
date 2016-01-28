@@ -17,7 +17,8 @@
             </div>
             <ul id="tools">
                 <li>
-                    <a href="@{Admin.index()}">Log in to write something</a>
+                    <a href="@{Admin.index()}">${user != null ? user.login : 'Log in to write something'} </a>
+                    <a href="@{Secure.logout()}">${user != null ? 'Log out' : ''}</a>
                 </li>
             </ul>
             <div id="title">
