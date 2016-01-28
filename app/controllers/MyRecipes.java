@@ -45,29 +45,35 @@ public class MyRecipes extends CRUD {
         }
     }
     
-    public static void create(String tagName, String ingredientName) throws Exception {
+    public static void create(String tags, String ingredients) throws Exception {
         User user = User.find("byLogin", Security.connected()).first();
-        DishCategory category = (DishCategory) DishCategory.findAll().get(0);
-        List<Ingredient> ingredients = new ArrayList<Ingredient>();
-        Set<Tag> tags = new TreeSet<Tag>();
-        Recipe recipe = new Recipe(user, "", category, 0, 0, 0, ingredients, tags, "");
+        List<Ingredient> ingredientsList = new ArrayList<Ingredient>();
+        Set<Tag> tagsList = new TreeSet<Tag>();
+        // Set tags list
+        for(String tag : tags.split("\\s+")) {
+            if(tag.trim().length() > 0) {
+                tagsList.add(Tag.findOrCreateByName(tag));
+            }
+        }
+        // Set ingredients list
+        for(String ingredient : ingredients.split("\\n+")) {
+            if(ingredient.trim().length() > 0) {
+                ingredientsList.add(Ingredient.findOrCreateByName(ingredient));
+            }
+        }
+        Recipe recipe = new Recipe(user, "", null, 0, 0, 0, ingredientsList, tagsList, "");
         Binder.bindBean(params.getRootParamNode(), "object", recipe);
-        /*validation.valid(recipe);
+        validation.valid(recipe);
         if (validation.hasErrors()) {
+            /*for(play.data.validation.Error error : validation.errors()) {
+                 System.out.println(error.getKey());
+             }*/
             renderArgs.put("error", play.i18n.Messages.get("crud.hasErrors"));
             try {
                 render(request.controller.replace(".", "/") + "/blank.html", recipe);
             } catch (TemplateNotFoundException e) {
                 render("CRUD/blank.html", recipe);
             }
-        }*/
-        if (tagName != "") {
-            Tag tag = new Tag(tagName).save();
-            recipe.tags.add(tag);
-        }
-        if (ingredientName != "") {
-            Ingredient ingredient = new Ingredient(ingredientName).save();
-            recipe.ingredients.add(ingredient);
         }
         recipe._save();
         flash.success(play.i18n.Messages.get("crud.created", "recipe"));

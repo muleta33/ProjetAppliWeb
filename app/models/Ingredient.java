@@ -27,7 +27,7 @@ public class Ingredient extends Model implements Comparable<Ingredient> {
     public static Ingredient findOrCreateByName(String description) {
         Ingredient ingredient = Ingredient.find("byDescription", description).first();
         if(ingredient == null) {
-            ingredient = new Ingredient(description);
+            ingredient = new Ingredient(description).save();
         }
         return ingredient;
     }

@@ -42,13 +42,13 @@
                         value="${object.ingredients.contains(ingredient) ? ingredient.id : ''}" />
                     #{/list}
                     
-                    <!-- Input for adding an ingredient -->
-                    <span>
-                        #{field 'ingredientName'}
-                        <input type="text" name="${field.name}" 
-                            value="${recipe?.ingredientName}" />
-                        #{/field}
-                    </span>
+                    <!-- Input for specifying additional ingredients -->
+	                <span>
+	                    #{field 'ingredients'}
+	                    <textarea id="${field.name}" name="${field.name}">${recipe?.ingredients}</textarea> 
+	                    #{/field}
+	                    <span class="crudHelp">One ingredient per line. To remove an ingredient, unselect it and save.</span>
+	                </span>
                     
                 </div>
             #{/crud.custom}
@@ -66,13 +66,14 @@
                         value="${object.tags.contains(tag) ? tag.id : ''}" />
 		            #{/list}
 		            
-		            <!-- Input for adding a tag -->
-		            <span>
-                        #{field 'tagName'}
-                        <input type="text" name="${field.name}" 
-                            value="${recipe?.tagName}" />
-                        #{/field}
-                    </span>
+		            <!-- Input for specifying additional tags -->
+	                <span>
+	                    #{field 'tags'}
+	                    <input type="text" id="${field.name}" name="${field.name}" 
+	                        value="${recipe?.tags}" size="50"/>
+	                    #{/field}
+	                    <span class="crudHelp">Tags must be separated by a single space. To remove a tag, unselect it and save.</span>
+	                </span>
                     
 		        </div>
 		    #{/crud.custom}
