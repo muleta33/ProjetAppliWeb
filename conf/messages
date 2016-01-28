@@ -20,6 +20,6 @@ login=Login
 password=Password
 isAdmin=User is admin
 
-secure.username=Your email:
+secure.username=Your login:
 secure.password=Your password:
 secure.signin=Log in
