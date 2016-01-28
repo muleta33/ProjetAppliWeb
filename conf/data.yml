@@ -1,15 +1,17 @@
 # you describe your data using the YAML notation here
 # and then load them using Fixtures.load("data.yml")
 
+# clear password = ensimag
 User(bob):
     email:              bob@gmail.com
     login:              Bobby38
-    password:           secret
+    password:           Vqbh/ugJiP2RCT6vQMNuJw==
 
+# clear password = ensimag
 User(jeff):
     email:              jeff@gmail.com
     login:              Jeff33 
-    password:           secret
+    password:           Vqbh/ugJiP2RCT6vQMNuJw==
     isAdmin:            true
 
 Ingredient(firstIngredient):

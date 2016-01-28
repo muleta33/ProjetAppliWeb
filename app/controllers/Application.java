@@ -39,7 +39,8 @@ public class Application extends Controller {
             recipes = Recipe.find("order by postedAt desc").fetch(10);
         }
         List<DishCategory> dishCategories = DishCategory.find("order by name asc").fetch();
-        render(dishCategories, recipes);
+        User user = User.find("byLogin", Security.connected()).first();
+        render(dishCategories, recipes, user);
     }
     
     public static void show(Long id) {
@@ -53,11 +54,12 @@ public class Application extends Controller {
             @Required(message="Please type the code") String code, String randomID) {
         Recipe recipe = Recipe.findById(recipeId);
         validation.equals(code, Cache.get(randomID)).message("Invalid code. Please type it again");
+        // Retrieve and check if the user is connected user
+        User user = User.find("byLogin", Security.connected()).first();
+        validation.required(user).message("You have to be connected to post a comment");
         if (validation.hasErrors()) {
             render("Application/show.html", recipe, randomID);
         }
-        // TODO: vérifier que l'utilisateur est connecté pour poster un commentaire
-        User user = User.find("byLogin", login).first();
         recipe.addComment(user, content, rating);
         flash.success("Thanks for posting!");
         Cache.delete(randomID);

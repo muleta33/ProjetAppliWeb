@@ -16,7 +16,7 @@ public class Admin extends CRUD {
     static void setConnectedUser() {
         if(Security.isConnected()) {
             User user = User.find("byLogin", Security.connected()).first();
-            renderArgs.put("user", user.login);
+            renderArgs.put("user", user);
         }
     }
     

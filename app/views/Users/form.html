@@ -1,0 +1,44 @@
+#{extends 'main.html' /}
+ 
+<h3>Enter your account details:</h3>
+ 
+#{form @save()}
+ 
+    #{ifErrors}
+        <p class="error">
+            Please correct these errors.
+        </p>
+    #{/ifErrors}
+     
+    <p>
+        #{field 'login'}
+        <label>Your login:</label>
+        <input type="text" name="${field.name}" 
+            value="${user?.login}" />
+        <span class="error">#{error 'user.login' /}</span>
+        #{/field}
+    </p>
+    
+    <p>
+        #{field 'email'}
+        <label>Your email:</label>
+        <input type="text" name="${field.name}" 
+            value="${user?.email}" />
+        <span class="error">#{error 'user.email' /}</span>
+        #{/field}
+    </p>
+    
+    <p>
+        #{field 'password'}
+        <label>Your password:</label>
+        <input type="password" name="${field.name}" 
+            value="${user?.password}" />
+        <span class="error">#{error 'user.password' /}</span>
+        #{/field}
+    </p>
+    
+    <p>
+        <input type="submit" value="Create your account" />
+    </p>
+    
+#{/form}

@@ -22,6 +22,11 @@
     <p class="success">${flash.success}</p>
 #{/if}
 
+#{if flash.error}
+    <p class="alert-message block-message error">${flash.error}</p>
+#{/if}
+
+
 #{display recipe:recipe, as:'full' /}
 
 <h3>Post a comment</h3>
@@ -34,10 +39,6 @@
         </p>
     #{/ifErrors}
     
-    <p>
-        <label for="login">Your login: </label>
-        <input type="text" name="login" id="login" />
-    </p>
     <p>
         <label for="login">Rating: </label>
         <input type="range" name="rating" id="rating" min="0" max="5" />

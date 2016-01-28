@@ -17,6 +17,7 @@ public class User extends Model {
     @Required
     public String email;
     
+    @Column(unique = true)
     public String login;
     
     @Required
@@ -28,6 +29,7 @@ public class User extends Model {
         this.email = email;
         this.login = login;
         this.password = Crypto.passwordHash(password);
+        this.isAdmin = false;
     }
     
     public static User connect(String login, String password) {

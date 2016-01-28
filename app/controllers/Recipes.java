@@ -30,10 +30,6 @@ public class Recipes extends CRUD {
                 render("CRUD/show.html", recipe);
             }
         }
-        flash.success(play.i18n.Messages.get("crud.saved", "recipe"));
-        if (params.get("_save") != null) {
-            redirect(request.controller + ".list");
-        }
         // Create and add tag if necessary
         if (!tagName.equals("")) {
             Tag tag = Tag.findOrCreateByName(tagName);
@@ -48,6 +44,11 @@ public class Recipes extends CRUD {
         }
         // Save the recipe
         recipe.save();
+        // Redirecting
+        flash.success(play.i18n.Messages.get("crud.saved", "recipe"));
+        if (params.get("_save") != null) {
+            redirect(request.controller + ".list");
+        }
         redirect(request.controller + ".show", recipe._key());
     }
 
