@@ -34,7 +34,7 @@ public class BasicTest extends UnitTest {
         ingredients.add(poulet);
         Ingredient basquaise = new Ingredient("basquaise").save();
         ingredients.add(basquaise);
-        DishCategory category = new DishCategory("Plat", new ArrayList<DishCategory>()).save();
+        DishCategory category = new DishCategory("Plat", new ArrayList<DishCategory>(), false).save();
         new Recipe(bob, "Poulet basquaise", category, 30, 60, 4, ingredients, "Préparation complète").save();
         
         // Test that the recipe has been created
@@ -73,7 +73,7 @@ public class BasicTest extends UnitTest {
         ingredients.add(poulet);
         Ingredient basquaise = new Ingredient("basquaise").save();
         ingredients.add(basquaise);
-        DishCategory category = new DishCategory("Plat", new ArrayList<DishCategory>()).save();
+        DishCategory category = new DishCategory("Plat", new ArrayList<DishCategory>(), false).save();
         Recipe bobRecipe = new Recipe(bob, "My first recipe", category, 12, 25, 2, ingredients, "Blabla").save();
      
         // Recipe a first comment
@@ -116,7 +116,7 @@ public class BasicTest extends UnitTest {
         ingredients.add(poulet);
         Ingredient basquaise = new Ingredient("basquaise").save();
         ingredients.add(basquaise);
-        DishCategory category = new DishCategory("Plat", new ArrayList<DishCategory>()).save();
+        DishCategory category = new DishCategory("Plat", new ArrayList<DishCategory>(), false).save();
         Recipe bobRecipe = new Recipe(bob, "Poulet basquaise", category, 12, 25, 2, ingredients, "Blabla").save();
         
         // Recipe a first comment
@@ -187,7 +187,7 @@ public class BasicTest extends UnitTest {
         ingredients.add(poulet);
         Ingredient basquaise = new Ingredient("basquaise").save();
         ingredients.add(basquaise);
-        DishCategory category = new DishCategory("Plat", new ArrayList<DishCategory>()).save();
+        DishCategory category = new DishCategory("Plat", new ArrayList<DishCategory>(), false).save();
         Recipe bobRecipe = new Recipe(bob, "Poulet basquaise", category, 12, 25, 2, ingredients, "Blabla").save();
         // Create a new recipe
         Ingredient epices = new Ingredient("épices").save();

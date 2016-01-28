@@ -20,9 +20,13 @@ public class DishCategory extends Model {
     @OneToMany
     public List<DishCategory> subCategories;
     
-    public DishCategory(String name, List<DishCategory> subCategories) {
+    @Required
+    public boolean hasAFather;
+    
+    public DishCategory(String name, List<DishCategory> subCategories, boolean hasAFather) {
         this.name = name;
         this.subCategories = new ArrayList<DishCategory>(subCategories);
+        this.hasAFather = hasAFather;
     }
     
     public String toString() {
@@ -32,7 +36,7 @@ public class DishCategory extends Model {
     public static DishCategory findOrCreateByName(String name) {
         DishCategory dishCategory = DishCategory.find("byName", name).first();
         if(dishCategory == null) {
-            dishCategory = new DishCategory(name, new ArrayList<DishCategory>());
+            dishCategory = new DishCategory(name, new ArrayList<DishCategory>(), false);
         }
         return dishCategory;
     }

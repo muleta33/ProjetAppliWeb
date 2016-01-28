@@ -38,7 +38,7 @@ public class Application extends Controller {
         else {
             recipes = Recipe.find("order by postedAt desc").fetch(10);
         }
-        List<DishCategory> dishCategories = DishCategory.find("order by name asc").fetch();
+        List<DishCategory> dishCategories = DishCategory.find("byHasAFather", false).fetch();
         User user = User.find("byLogin", Security.connected()).first();
         render(dishCategories, recipes, user);
     }

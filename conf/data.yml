@@ -23,28 +23,34 @@ Ingredient(secondIngredient):
 DishCategory(salade):
     name:               Salade
     subCategories:      []
+    hasAFather:         true
     
 DishCategory(entreeChaude):
     name:               Entrée chaude
     subCategories:      []
+    hasAFather:         true
     
 DishCategory(entree):
     name:               Entrée
     subCategories:
         - salade
         - entreeChaude
+    hasAFather:         false
     
 DishCategory(viandeSauce):
     name:               Viande en sauce
     subCategories:      []
+    hasAFather:         true
     
 DishCategory(accompagnement):
     name:               Accompagnement
     subCategories:      []
+    hasAFather:         true
     
 DishCategory(platComplet):
     name:               Plat complet
     subCategories:      []
+    hasAFather:         true
     
 DishCategory(plat):
     name:               Plat
@@ -52,6 +58,7 @@ DishCategory(plat):
         - viandeSauce
         - accompagnement
         - platComplet
+    hasAFather:         false
     
 Tag(firstTag):
     name:           Ingrédient1
