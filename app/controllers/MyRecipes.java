@@ -7,6 +7,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
+import java.security.*;
 
 import controllers.CRUD.ObjectType;
 import models.DishCategory;
@@ -87,11 +88,18 @@ public class MyRecipes extends CRUD {
     }
     
     public static void save(Long id, String tags, String ingredients) throws Exception {
+        // Access control check
+        User user = User.find("byLogin", Security.connected()).first();
+        Recipe r = Recipe.findById(id);
+        if (r.author.login != user.login)
+            forbidden();
+        // Retrieve the object
         ObjectType type = ObjectType.get(getControllerClass());
         notFoundIfNull(type);
         Model object = type.findById(id.toString());
         notFoundIfNull(object);
         Binder.bindBean(params.getRootParamNode(), "object", object);
+        // Validation
         validation.valid(object);
         if (validation.hasErrors()) {
             renderArgs.put("error", play.i18n.Messages.get("crud.hasErrors"));

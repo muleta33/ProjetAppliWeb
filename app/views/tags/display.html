@@ -4,7 +4,8 @@
     <h2 class="recipe-title">
         <a href="@{Application.show(_recipe.id)}">${_recipe.title}</a>
     </h2>
-    <span>${_recipe.category.name}, ${_recipe.computeRating().nl2br()} / 5</span>
+    <span>${_recipe.category.name}</span>
+    <span>#{if _recipe.comments.size() != 0}, ${_recipe.computeRating().nl2br()} / 5 #{/if}</span>
     <div class="recipe-metadata">
         <span class="recipe-author">by ${_recipe.author.login}</span>,
         <span class="recipe-date">${_recipe.postedAt.format('dd MMM yy')}</span>

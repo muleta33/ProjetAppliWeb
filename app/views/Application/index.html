@@ -1,7 +1,5 @@
 #{extends 'main.html' /}
 #{set title:'Home' /}
-
-<h3>Select categories</h3>
  
 #{form @index()}
  
@@ -16,7 +14,10 @@
 	    <a href="#show1" class="show" id="show1">-</a>
     
 	    <div class="dish-categories">
-			<ul>
+	       <label for="categories">
+                Select categories
+            </label>
+			<ul id="categories">
 				#{list items:dishCategories, as:'dishCategory'}
 					<li>
 						#{displayDishCategoryCheckboxes dishCategory:dishCategory /}

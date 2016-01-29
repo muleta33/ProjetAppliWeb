@@ -1,5 +1,7 @@
 eclipse.preferences.version=1
 encoding//app/views/CRUD/layout.html=UTF-8
+encoding//app/views/errors/404.html=UTF-8
+encoding//app/views/errors/500.html=UTF-8
 encoding//crud/views/CRUD/layout.html=UTF-8
 encoding//secure/views/Secure/layout.html=UTF-8
 encoding/<project>=UTF-8
