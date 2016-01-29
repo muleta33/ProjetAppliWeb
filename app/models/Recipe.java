@@ -31,9 +31,8 @@ public class Recipe extends Model {
     @Required
     public int numberOfPersons;
     
-    @Required
     @ManyToMany
-    public List<Ingredient> ingredients;
+    public Set<Ingredient> ingredients;
     
     @OneToMany(mappedBy="recipe", cascade=CascadeType.ALL)
     public List<Comment> comments;
@@ -51,7 +50,7 @@ public class Recipe extends Model {
     public Set<Tag> tags;
     
     public Recipe(User author, String title, DishCategory category, int preparationTime, int cookingTime, int numberOfPersons, 
-                  List<Ingredient> ingredients, Set<Tag> tags, String content) {
+                  Set<Ingredient> ingredients, Set<Tag> tags, String content) {
         this.author = author;
         this.title = title;
         this.category = category;
@@ -59,7 +58,7 @@ public class Recipe extends Model {
         this.preparationTime = preparationTime;
         this.cookingTime = cookingTime;
         this.numberOfPersons = numberOfPersons;
-        this.ingredients = new ArrayList<Ingredient>(ingredients);
+        this.ingredients = new TreeSet<Ingredient>(ingredients);
         this.comments = new ArrayList<Comment>();
         this.tags = new TreeSet<Tag>(tags);
         this.content = content;

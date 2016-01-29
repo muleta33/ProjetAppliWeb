@@ -16,7 +16,6 @@ public class DishCategory extends Model {
     @Required
     public String name;
     
-    @Required
     @OneToMany
     public List<DishCategory> subCategories;
     
