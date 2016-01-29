@@ -1,7 +1,30 @@
 *{ You can use plain selenium command using the selenium tag }*
+#{fixture delete:'all', load:'data.yml' /}
 
-#{selenium}
+#{selenium 'Check home page'}
+	clearSession()
+	
     // Open the home page, and check that no error occured
     open('/')
-    assertNotTitle('Application error')
+    
+    // Check that the recipe is present
+    assertTextPresent('My first recipe')
+    assertTextPresent('by Bobby38, 14 Jan 16')
+    assertTextPresent('2 comments , latest by Bobby38')
+#{/selenium}
+
+#{selenium 'Test comments'}
+ 
+    // Click on 'My first recipe'
+    clickAndWait('link=My first recipe')
+    assertTextPresent('My first recipe')
+    assertTextPresent('2 comments')
+    
+    // Post a new comment
+    type('content', 'Good one')
+    type('code', 'XXXXX')
+    clickAndWait('css=input[type=submit]')
+    
+    // Should get an error, still 2 comments
+    assertTextPresent('2 comments')
 #{/selenium}
