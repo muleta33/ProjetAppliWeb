@@ -4,6 +4,7 @@
     <h2 class="recipe-title">
         <a href="@{Application.show(_recipe.id)}">${_recipe.title}</a>
     </h2>
+    <span>${_recipe.category.name}, ${_recipe.computeRating().nl2br()} / 5</span>
     <div class="recipe-metadata">
         <span class="recipe-author">by ${_recipe.author.login}</span>,
         <span class="recipe-date">${_recipe.postedAt.format('dd MMM yy')}</span>
@@ -41,7 +42,7 @@
             	<div class="recipe-description">
             		${_recipe.content.nl2br()}
             	</div>
-            ${_recipe.computeRating().nl2br()}
+            
         </div>
     #{/if}
 </div>

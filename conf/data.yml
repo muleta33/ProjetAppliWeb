@@ -20,6 +20,9 @@ Ingredient(firstIngredient):
 Ingredient(secondIngredient):
     description:       le deuxième ingrédient
     
+Ingredient(thirdIngredient):
+    description:       a fantastic ingredient
+    
 DishCategory(salade):
     name:               Salade
     subCategories:      []
@@ -61,15 +64,15 @@ DishCategory(plat):
     hasAFather:         false
     
 Tag(firstTag):
-    name:           Ingrédient1
+    name:           recipeTag
  
 Tag(secondTag):
-    name:           Ingrédient2
+    name:           myTag
 
 Recipe(firstBobRecipe):
     postedAt:          2016-01-14
     author:            bob
-    title:             My first recipe
+    title:             Ma première recette
     category:          viandeSauce
     preparationTime:   25
     cookingTime:       30
@@ -81,6 +84,21 @@ Recipe(firstBobRecipe):
         - firstTag
     content:            >
                         On mélange tout et c'est prêt.
+                        
+Recipe(firstJeffRecipe):
+    postedAt:          2016-01-18
+    author:            jeff
+    title:             Une recette à ne pas louper
+    category:          entreeChaude
+    preparationTime:   2
+    cookingTime:       0
+    numberOfPersons:   4
+    ingredients:
+        - thirdIngredient
+    tags:
+        - secondTag
+    content:            >
+                        A déguster sans préparation.
 
 Comment(c1):
     postedAt:           2016-01-17

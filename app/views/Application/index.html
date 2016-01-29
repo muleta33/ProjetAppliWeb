@@ -11,25 +11,31 @@
         </p>
     #{/ifErrors}
     
-    <div class="dish-categories">
-		<ul>
-			#{list items:dishCategories, as:'dishCategory'}
-				<li>
-					#{displayDishCategoryCheckboxes dishCategory:dishCategory /}
-				</li>
-			#{/list}
-			#{field 'dishCategoriesText'}
-				<input type="hidden" size="50" id="${field.name}" name="${field.name}" value="${dishCategoriesText}"/>
-			#{/field}
-			#{field 'dishTagsText'}
-				<input type="text" size="50" id="${field.name}" name="${field.name}" value="${dishTagsText}"/>
-			#{/field}
-    	</ul>
-	</div>
+    <div class="collapsible">
+	    <a href="#hide1" class="hide" id="hide1">+</a>
+	    <a href="#show1" class="show" id="show1">-</a>
+    
+	    <div class="dish-categories">
+			<ul>
+				#{list items:dishCategories, as:'dishCategory'}
+					<li>
+						#{displayDishCategoryCheckboxes dishCategory:dishCategory /}
+					</li>
+				#{/list}
+	    	</ul>
 	
-    <p>
-        <input type="submit" value="Search recipes"/>
-    </p>
+		#{field 'dishCategoriesText'}
+	        <input type="hidden" size="50" id="${field.name}" name="${field.name}" value="${dishCategoriesText}"/>
+	    #{/field}
+	    #{field 'dishTagsText'}
+	        <label for=${field.name}">
+	            &{'Shearch by tag'}
+	        </label>
+	        <input type="text" size="20" id="${field.name}" name="${field.name}" value="${dishTagsText}"/>
+	    #{/field}
+	    <input type="submit" value="Search recipes"/>
+		</div>
+	</div>
     
 #{/form}
 

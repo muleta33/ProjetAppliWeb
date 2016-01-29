@@ -1,7 +1,7 @@
 /** Main layout **/
 
 html, body {
-    background: #364B66 !important;
+    background: #add8e6!important;
     font-family: Helvetica, Arial, Sans !important;
 }
 
@@ -50,7 +50,7 @@ body {
 }
 
 #title {
-    background-image: url("http://previews.123rf.com/images/karandaev/karandaev1403/karandaev140300302/26664812-Fresh-ingredients-for-cooking-pasta-tomato-and-spices-over-wooden-table-background-with-copy-space-Stock-Photo.jpg");
+    background-image: url('../images/background-cooking.jpg');
     padding: 20px 30px 30px 20px;
     margin: 20px 0;
     color: #ffffff;
@@ -94,7 +94,7 @@ body {
 /** Main content **/
 
 #main {
-    background: #364B66;
+    background: #FFFACD;
     background: -webkit-gradient(linear, left top, left 30%, from(#314660), to(#364B66));
     -webkit-border-radius: 16px;
     -moz-border-radius: 16px;
@@ -196,7 +196,7 @@ body {
 }
 
 h3 {
-    color: #869AB1;
+    color: #2d5d95;
     font-size: 18px;
     margin-bottom: 15px;
 }
@@ -398,7 +398,7 @@ form label {
 }
 
 #crudContent h2 {
-    color: #EDC3CD !important;
+    color: #76236c!important;
 }
 
 #crudContent thead tr {
@@ -433,11 +433,11 @@ tr.odd {
 }
 
 .crudField label {
-    color: #B8FA5C;
+    color: #2628c8;
 }
 
 .crudHelp {
-    color: #fff !important;
+    color: #4d4d4d!important;
 }
 
 .crudField .tag {
@@ -544,4 +544,64 @@ tr.odd {
 
 .hasError {
     background: pink;
+}
+
+/** Search on index page **/
+.dish-categories ul {
+	font-size: 11px;
+}
+
+.dish-categories li{
+    margin: 1px;
+}
+
+.collapsible { 
+    display : block;
+    margin: 0px 0px 0px 20px;
+    vertical-align: top; 
+    height:auto !important; 
+}
+.dish-categories {
+    display:none; 
+    height:auto;
+    margin:0;
+}
+.show {
+    display: none; 
+}
+.hide:target + .show {
+    display: inline; 
+}
+.hide:target {
+    display: none; 
+}
+.hide:target ~ .dish-categories {
+    display:inline; 
+}
+
+/*style the (+) and (-) */
+.hide, .show {
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+    font-size: 20px;
+    color: #fff;
+    text-shadow: 0 1px 0 #666;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: 1px 1px 2px #000;
+    background: #ffffff;
+    opacity: .95;
+    margin-right: 0;
+    float: right;
+    margin-bottom: 25px;
+}
+
+.hide:hover, .show:hover {
+    color: #eee;
+    text-shadow: 0 0 1px #666;
+    text-decoration: none;
+    box-shadow: 0 0 4px #222 inset;
+    opacity: 1;
+    margin-bottom: 25px;
 }

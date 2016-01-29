@@ -22,7 +22,7 @@ public class Application extends Controller {
     
     public static void index(String dishCategoriesText, String dishTagsText) {
         List<Recipe> recipes = new ArrayList<Recipe>();
-        if ((dishTagsText == null || dishTagsText == "") && (dishCategoriesText == null || dishCategoriesText == ""))
+        if ((dishTagsText == null) && (dishCategoriesText == null))
             recipes = Recipe.find("order by postedAt desc").fetch(10);
         if (dishTagsText != null)
             recipes = Recipe.findTaggedWith(dishTagsText);
