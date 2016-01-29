@@ -19,7 +19,10 @@
 				</li>
 			#{/list}
 			#{field 'dishCategoriesText'}
-				<input type="hidden" size="50" id="${field.name}" name="${field.name}"/>
+				<input type="hidden" size="50" id="${field.name}" name="${field.name}" value="${dishCategoriesText}"/>
+			#{/field}
+			#{field 'dishTagsText'}
+				<input type="text" size="50" id="${field.name}" name="${field.name}" value="${dishTagsText}"/>
 			#{/field}
     	</ul>
 	</div>

@@ -1,6 +1,6 @@
 // Apparently click is better chan change? Cuz IE?
 $(document).ready(function() {
-	
+
 $('input[type="checkbox"]').change(function(e) {
 
   var checked = $(this).prop("checked"),
@@ -49,9 +49,19 @@ if (all && checked) {
 
   checkSiblings(container);
 });
-
 $('input[type="checkbox"]').change(writeCheckedTextboxes);
+
+loadSavedData();
 })
+
+function loadSavedData() {
+	var hiddenInput = $('input[type="hidden"]').val();
+	var checkedDishCategories = hiddenInput.split("   ");
+	checkedDishCategories.forEach(function(elem) 
+			{
+				$("input[id='" + elem + "']").prop("checked", true);
+			});
+}
 
 function writeCheckedTextboxes() {
 	// Récupération de la textbox

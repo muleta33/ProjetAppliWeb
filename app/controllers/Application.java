@@ -20,8 +20,12 @@ public class Application extends Controller {
         renderArgs.put("applicationBaseline", Play.configuration.getProperty("application.baseline"));
     }
     
-    public static void index(String dishCategoriesText) {
+    public static void index(String dishCategoriesText, String dishTagsText) {
         List<Recipe> recipes = new ArrayList<Recipe>();
+        if ((dishTagsText == null || dishTagsText == "") && (dishCategoriesText == null || dishCategoriesText == ""))
+            recipes = Recipe.find("order by postedAt desc").fetch(10);
+        if (dishTagsText != null)
+            recipes = Recipe.findTaggedWith(dishTagsText);
         if (dishCategoriesText != null)
         {
             for(String dishCategory : dishCategoriesText.split("   ")) {
@@ -35,12 +39,9 @@ public class Application extends Controller {
                 }
             }
         }
-        else {
-            recipes = Recipe.find("order by postedAt desc").fetch(10);
-        }
         List<DishCategory> dishCategories = DishCategory.find("byHasAFather", false).fetch();
         User user = User.find("byLogin", Security.connected()).first();
-        render(dishCategories, recipes, user);
+        render(dishCategoriesText, dishTagsText, dishCategories, recipes, user);
     }
     
     public static void show(Long id) {

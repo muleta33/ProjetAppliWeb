@@ -10,7 +10,7 @@ public class Security extends controllers.Secure.Security {
     }
     
     static void onDisconnected() {
-        Application.index("");
+        Application.index("", "");
     }
     
     static void onAuthenticated() {
