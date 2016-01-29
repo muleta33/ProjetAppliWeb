@@ -30,13 +30,13 @@
             <div class="about">Detail: </div>
             	<div class="recipe-time">Temps de préparation : ${_recipe.preparationTime} minutes</div>
             	<div class="recipe-time">Temps de cuisson : ${_recipe.cookingTime} minutes</div>
-            	<div class="recipe-ingredients">
+            	<div class="recipe">
             		Pour ${_recipe.numberOfPersons} personnes :
+            		<ul>
             		#{list items:_recipe.ingredients, as:'ingredient'}
-            			<div class="ingredient">
-            				${ingredient.description.nl2br()}
-            			</div>
+            			     <li>${ingredient.description.nl2br()}</li>
         			#{/list}
+        			</ul>
             	</div>
             	<div class="recipe-description">
             		${_recipe.content.nl2br()}

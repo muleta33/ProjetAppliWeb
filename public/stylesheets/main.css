@@ -50,10 +50,10 @@ body {
 }
 
 #title {
-    background: #B8C569;
+    background-image: url("http://previews.123rf.com/images/karandaev/karandaev1403/karandaev140300302/26664812-Fresh-ingredients-for-cooking-pasta-tomato-and-spices-over-wooden-table-background-with-copy-space-Stock-Photo.jpg");
     padding: 20px 30px 30px 20px;
     margin: 20px 0;
-    color: #3C4313;
+    color: #ffffff;
     position: relative;
     -webkit-border-radius: 16px;
     -webkit-box-shadow: 0 2px 0 #93A045;
@@ -94,7 +94,7 @@ body {
 /** Main content **/
 
 #main {
-    background: #314660;
+    background: #364B66;
     background: -webkit-gradient(linear, left top, left 30%, from(#314660), to(#364B66));
     -webkit-border-radius: 16px;
     -moz-border-radius: 16px;
