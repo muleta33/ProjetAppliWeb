@@ -29,7 +29,7 @@ public class BasicTest extends UnitTest {
         User bob = new User("bob@gmail.com", "Bob", "secret").save();
         
         // Create a new Recipe
-        List<Ingredient> ingredients = new ArrayList<Ingredient>();
+        Set<Ingredient> ingredients = new TreeSet<Ingredient>();
         Ingredient poulet = new Ingredient("poulet").save();
         ingredients.add(poulet);
         Ingredient basquaise = new Ingredient("basquaise").save();
@@ -55,8 +55,8 @@ public class BasicTest extends UnitTest {
         assertEquals(30, firstRecipe.preparationTime);
         assertEquals(60, firstRecipe.cookingTime);
         assertEquals(4, firstRecipe.numberOfPersons);
-        assertEquals("poulet", firstRecipe.ingredients.get(0).description);
-        assertEquals("basquaise", firstRecipe.ingredients.get(1).description);
+        assertEquals(true, firstRecipe.ingredients.contains(poulet));
+        assertEquals(true, firstRecipe.ingredients.contains(basquaise));
         assertEquals("Préparation complète", firstRecipe.content);
         assertNotNull(firstRecipe.postedAt);
     }
@@ -70,7 +70,7 @@ public class BasicTest extends UnitTest {
         User jeff = new User("jeff@gmail.com", "Jeff33", "secret").save();
      
         // Create a new recipe
-        List<Ingredient> ingredients = new ArrayList<Ingredient>();
+        Set<Ingredient> ingredients = new TreeSet<Ingredient>();
         Ingredient poulet = new Ingredient("poulet").save();
         ingredients.add(poulet);
         Ingredient basquaise = new Ingredient("basquaise").save();
@@ -115,7 +115,7 @@ public class BasicTest extends UnitTest {
         User tom = new User("tom@gmail.com", "Tom33", "secret").save();
         
         // Create a new recipe
-        List<Ingredient> ingredients = new ArrayList<Ingredient>();
+        Set<Ingredient> ingredients = new TreeSet<Ingredient>();
         Ingredient poulet = new Ingredient("poulet").save();
         ingredients.add(poulet);
         Ingredient basquaise = new Ingredient("basquaise").save();
@@ -188,7 +188,7 @@ public class BasicTest extends UnitTest {
         User bob = new User("bob@gmail.com", "secret", "Bob").save();
      
         // Create a new recipe
-        List<Ingredient> ingredients = new ArrayList<Ingredient>();
+        Set<Ingredient> ingredients = new TreeSet<Ingredient>();
         Ingredient poulet = new Ingredient("poulet").save();
         ingredients.add(poulet);
         Ingredient basquaise = new Ingredient("basquaise").save();

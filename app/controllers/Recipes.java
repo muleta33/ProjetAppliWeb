@@ -16,18 +16,22 @@ import play.mvc.*;
 public class Recipes extends CRUD {
     
     public static void save(Long id, String tags, String ingredients) throws Exception {
-        /* Attention erreur si titre vide ??? */
-        Recipe recipe = Recipe.findById(id);
-        Binder.bindBean(params.getRootParamNode(), "object", recipe);
-        validation.valid(recipe);
+        ObjectType type = ObjectType.get(getControllerClass());
+        notFoundIfNull(type);
+        Model object = type.findById(id.toString());
+        notFoundIfNull(object);
+        Binder.bindBean(params.getRootParamNode(), "object", object);
+        validation.valid(object);
         if (validation.hasErrors()) {
             renderArgs.put("error", play.i18n.Messages.get("crud.hasErrors"));
             try {
-                render(request.controller.replace(".", "/") + "/show.html", recipe);
+                render(request.controller.replace(".", "/") + "/show.html", type, object);
             } catch (TemplateNotFoundException e) {
-                render("CRUD/show.html", recipe);
+                render("CRUD/show.html", type, object);
             }
         }
+        // Trick to create and add new tags/ingredients
+        Recipe recipe = (Recipe)object;
         // Set tags list
         for(String tag : tags.split("\\s+")) {
             if(tag.trim().length() > 0) {
@@ -41,13 +45,13 @@ public class Recipes extends CRUD {
             }
         }
         // Save the recipe
-        recipe._save();
+        object._save();
         // Redirecting
         flash.success(play.i18n.Messages.get("crud.saved", "recipe"));
         if (params.get("_save") != null) {
             redirect(request.controller + ".list");
         }
-        redirect(request.controller + ".show", recipe._key());
+        redirect(request.controller + ".show", object._key());
     }
 
 }

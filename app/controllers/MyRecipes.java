@@ -47,7 +47,7 @@ public class MyRecipes extends CRUD {
     
     public static void create(String tags, String ingredients) throws Exception {
         User user = User.find("byLogin", Security.connected()).first();
-        List<Ingredient> ingredientsList = new ArrayList<Ingredient>();
+        Set<Ingredient> ingredientsList = new TreeSet<Ingredient>();
         Set<Tag> tagsList = new TreeSet<Tag>();
         // Set tags list
         for(String tag : tags.split("\\s+")) {
@@ -84,5 +84,44 @@ public class MyRecipes extends CRUD {
             redirect(request.controller + ".blank");
         }
         redirect(request.controller + ".show", recipe._key());
+    }
+    
+    public static void save(Long id, String tags, String ingredients) throws Exception {
+        ObjectType type = ObjectType.get(getControllerClass());
+        notFoundIfNull(type);
+        Model object = type.findById(id.toString());
+        notFoundIfNull(object);
+        Binder.bindBean(params.getRootParamNode(), "object", object);
+        validation.valid(object);
+        if (validation.hasErrors()) {
+            renderArgs.put("error", play.i18n.Messages.get("crud.hasErrors"));
+            try {
+                render(request.controller.replace(".", "/") + "/show.html", type, object);
+            } catch (TemplateNotFoundException e) {
+                render("CRUD/show.html", type, object);
+            }
+        }
+        // Trick to create and add new tags/ingredients
+        Recipe recipe = (Recipe)object;
+        // Set tags list
+        for(String tag : tags.split("\\s+")) {
+            if(tag.trim().length() > 0) {
+                recipe.tags.add(Tag.findOrCreateByName(tag));
+            }
+        }
+        // Set ingredients list
+        for(String ingredient : ingredients.split("\\n+")) {
+            if(ingredient.trim().length() > 0) {
+                recipe.ingredients.add(Ingredient.findOrCreateByName(ingredient));
+            }
+        }
+        // Save the recipe
+        object._save();
+        // Redirecting
+        flash.success(play.i18n.Messages.get("crud.saved", "recipe"));
+        if (params.get("_save") != null) {
+            redirect(request.controller + ".list");
+        }
+        redirect(request.controller + ".show", object._key());
     }
 }
