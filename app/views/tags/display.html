@@ -65,6 +65,9 @@
                     <span class="comment-date">
                         ${comment.postedAt.format('dd MMM yy')}
                     </span>
+                    <div class="comment-rating">
+                        ${comment.rating != 0 ? 'rating: '+comment.rating+'/5' : 'no rating'}
+                    </div>
                 </div>
                 <div class="comment-content">
                     <div class="about">Detail: </div>

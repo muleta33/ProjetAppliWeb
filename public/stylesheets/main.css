@@ -99,7 +99,7 @@ h2 {
 /** Main content **/
 
 #main {
-    background: #FFFACD;
+    background: #fffcdd;
     background: -webkit-gradient(linear, left top, left 30%, from(#314660), to(#364B66));
     -webkit-border-radius: 16px;
     -moz-border-radius: 16px;
@@ -222,9 +222,9 @@ h3 .rating-container {
 }
 
 .comment .comment-metadata {
-    color: #869AB1;
+    color: #343c44;
     display: block;
-    font-size: 50%;
+    font-size: 65%;
     display: block;
     float: left;
     width: 80px;
@@ -232,7 +232,7 @@ h3 .rating-container {
 }
 
 .comment .comment-author {
-    font-size: 150%;
+    font-size: 140%;
     font-weight: bold;
     display: block;
 }
@@ -241,7 +241,7 @@ h3 .rating-container {
     position: relative;
     background: #E4EAFF;
     color: #242C58;
-    font-size: 80%;
+    font-size: 105%;
     margin-top: 10px;
     margin-bottom: 10px;
     margin-left: 100px;

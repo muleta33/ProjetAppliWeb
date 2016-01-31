@@ -41,7 +41,7 @@
 #{if recipes.size()}
 
     <div class="recipes">
-        #{if (dishCategoriesText == null) || (dishTagsText == null)}
+        #{if (dishCategoriesText == null) && (dishTagsText == null)}
             <h2>Most recent recipes</h2>
         #{/if}
         #{else}
