@@ -1,14 +1,17 @@
 *{ Display a recipe in one of these modes: 'full', 'home' or 'teaser' }*
  
 <div class="recipe ${_as == 'teaser' ? 'teaser' : ''}">
-    <h2 class="recipe-title">
+    <h3 class="recipe-title">
         <a href="@{Application.show(_recipe.id)}">${_recipe.title}</a>
-    </h2>
-    <span>${_recipe.category.name}</span>
-    <span>#{if _recipe.comments.size() != 0}, ${_recipe.computeRating().nl2br()} / 5 #{/if}</span>
-    <div class="recipe-metadata">
+        #{if _recipe.comments.size() != 0} 
+            <input class="rating" data-disabled="true" value="${_recipe.computeRating().nl2br()}" data-size="xs" data-show-clear="false" data-show-caption="false" glyphicon="false"> 
+        #{/if}
+    </h3>
+    
+    <div class="recipe-metadata"> 
         <span class="recipe-author">by ${_recipe.author.login}</span>,
         <span class="recipe-date">${_recipe.postedAt.format('dd MMM yy')}</span>
+        <span> - ${_recipe.category.name}</span>
         #{if _as != 'full'}
             <span class="recipe-comments">
                 &nbsp;|&nbsp; ${_recipe.comments.size() ?: 'no'} 

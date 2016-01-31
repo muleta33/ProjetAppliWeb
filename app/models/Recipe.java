@@ -74,10 +74,14 @@ public class Recipe extends Model {
     
     public float computeRating() {
         rating = 0;
+        int notNullRatings = 0;
         for (Comment comment : comments) {
-            rating += comment.rating;
+            if (comment.rating != 0) {
+                rating += comment.rating;
+                notNullRatings ++;
+            }
         }
-        rating /= comments.size();
+        rating /= notNullRatings;
         return rating;
     }
     

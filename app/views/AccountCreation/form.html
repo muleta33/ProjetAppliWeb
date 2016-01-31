@@ -1,9 +1,9 @@
 #{extends 'main.html' /}
  
-<h3>Enter your account details:</h3>
- 
+<h3>Let's share your recipes! Create your account:</h3>
+
 #{form @save()}
- 
+    <div class="form">
     #{ifErrors}
         <p class="error">
             Please correct these errors.
@@ -42,7 +42,7 @@
     </p>
     
     <p>
-        <input type="submit" value="Create your account" />
+        <input type="submit" class="btn btn-primary" value="Create your account" />
     </p>
-    
+    </div>
 #{/form}

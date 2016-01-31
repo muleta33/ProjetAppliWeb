@@ -11,6 +11,11 @@ body {
     margin: auto;
 }
 
+h2 {
+	font-size: 20px;
+	font-style: italic;
+}
+
 /** Blog header **/
 
 #header {
@@ -103,33 +108,34 @@ body {
 
 /** Post **/
 
-.post .post-title {
-    margin: 0;
+.recipe .recipe-title {
+    margin-bottom: 2px;
 }
 
-.post .post-title a {
-    font-size: 36px;
-    color: #F5C2CC;
+.recipe .recipe-title a {
+	margin-top: 12px;
+    font-size: 32px;
+    color: #dd4508;
     text-decoration: none;
 }
 
-.post .post-metadata {
-    color: #BAC36E;
+.recipe .recipe-metadata {
+    color: #4743bc;
     display: block;
-    font-size: 70%;
+    font-size: 90%;
     display: inline-block;
 }
 
-.post .post-author {
-    font-size: 130%;
+.recipe .recipe-author {
+    font-size: 140%;
     font-weight: bold;
 }
 
-.post .post-metadata a {
-    color: #9FA85D;
+.recipe .recipe-metadata a {
+    color: #4743bc;
 }
 
-.post .post-content {
+.recipe .recipe-content {
     position: relative;
     background: #fff;
     padding: 10px;
@@ -139,7 +145,7 @@ body {
     -webkit-box-shadow: 0 2px 0 #BBBBBB;
 }
 
-.post .about {
+.recipe .about {
     text-indent: -999em;
     display: block;
     width: 0; 
@@ -196,14 +202,18 @@ body {
 }
 
 h3 {
-    color: #2d5d95;
-    font-size: 18px;
+    color: #214773;
+    font-size: 25px;
     margin-bottom: 15px;
 }
 
 h3 span {
     font-size: 80%;
     font-weight: normal;
+}
+
+h3 .rating-container {
+    font-size: 55%;
 }
 
 .comment {
@@ -256,7 +266,7 @@ h3 span {
 
 /** Form **/
 
-form {
+.form {
     padding: 10px;
     background: #253142;
     background: -webkit-gradient(linear, left top, left 60%, from(#253142), to(#364B66));
@@ -264,7 +274,7 @@ form {
     -moz-border-radius: 10px;
 }
 
-form .error {
+.form .error {
     background: #c00;
     color: #fff;
     font-size: 90%;
@@ -274,20 +284,20 @@ form .error {
     -webkit-box-shadow: 0 2px 0 #800;
 }
 
-form p {
+.form p {
     margin: 5px 0 0 0;
 }
 
-form textarea {
+.form textarea {
     width: 70%;
     height: 150px;
 }
 
-form input, form textarea {
+.form input, form textarea {
     font-size: 14px;
 }
 
-form label {
+.form label {
     display: block;
     font-weight: bold;
     font-size: 90%;
@@ -547,6 +557,10 @@ tr.odd {
 }
 
 /** Search on index page **/
+#search-area {
+	color: #253142;
+}
+
 .dish-categories ul {
 	font-size: 11px;
 }
@@ -555,53 +569,7 @@ tr.odd {
     margin: 1px;
 }
 
-.collapsible { 
-    display : block;
-    margin: 0px 0px 0px 20px;
-    vertical-align: top; 
-    height:auto !important; 
-}
-.dish-categories {
-    display:none; 
-    height:auto;
-    margin:0;
-}
-.show {
-    display: none; 
-}
-.hide:target + .show {
-    display: inline; 
-}
-.hide:target {
-    display: none; 
-}
-.hide:target ~ .dish-categories {
-    display:inline; 
-}
-
-/*style the (+) and (-) */
-.hide, .show {
-    width: 30px;
-    height: 30px;
-    border-radius: 30px;
-    font-size: 20px;
-    color: #fff;
-    text-shadow: 0 1px 0 #666;
-    text-align: center;
-    text-decoration: none;
-    box-shadow: 1px 1px 2px #000;
-    background: #ffffff;
-    opacity: .95;
-    margin-right: 0;
-    float: right;
-    margin-bottom: 25px;
-}
-
-.hide:hover, .show:hover {
-    color: #eee;
-    text-shadow: 0 0 1px #666;
-    text-decoration: none;
-    box-shadow: 0 0 4px #222 inset;
-    opacity: 1;
-    margin-bottom: 25px;
+/** Rating stars display **/
+.star-rating {
+	display: inline;
 }

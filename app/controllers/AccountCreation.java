@@ -11,8 +11,8 @@ public class AccountCreation extends CRUD {
 
     @Before
     static void addDefaults() {
-        renderArgs.put("applicationTitle", "New user?");
-        renderArgs.put("applicationBaseline", "Create your account and share your recipes!");
+        renderArgs.put("applicationTitle", Play.configuration.getProperty("application.title"));
+        renderArgs.put("applicationBaseline", Play.configuration.getProperty("application.baseline"));
     }
     
     public static void form() {

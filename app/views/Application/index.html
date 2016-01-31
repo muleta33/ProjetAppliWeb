@@ -1,6 +1,7 @@
 #{extends 'main.html' /}
 #{set title:'Home' /}
  
+ <button class="btn btn-info" data-toggle="collapse" data-target="#search-area">Find a recipe!</button>
 #{form @index()}
  
     #{ifErrors}
@@ -9,10 +10,7 @@
         </p>
     #{/ifErrors}
     
-    <div class="collapsible">
-	    <a href="#hide1" class="hide" id="hide1">+</a>
-	    <a href="#show1" class="show" id="show1">-</a>
-    
+    <div id="search-area" class="collapse">
 	    <div class="dish-categories">
 	       <label for="categories">
                 Select categories
@@ -28,6 +26,7 @@
 		#{field 'dishCategoriesText'}
 	        <input type="hidden" size="50" id="${field.name}" name="${field.name}" value="${dishCategoriesText}"/>
 	    #{/field}
+	    </div>
 	    #{field 'dishTagsText'}
 	        <label for=${field.name}">
 	            &{'Shearch by tag'}
@@ -35,7 +34,6 @@
 	        <input type="text" size="20" id="${field.name}" name="${field.name}" value="${dishTagsText}"/>
 	    #{/field}
 	    <input type="submit" value="Search recipes"/>
-		</div>
 	</div>
     
 #{/form}
@@ -43,7 +41,12 @@
 #{if recipes.size()}
 
     <div class="recipes">
-        <h3>Most recent recipes <span class="from">from this application</span></h3>
+        #{if (dishCategoriesText == null) || (dishTagsText == null)}
+            <h2>Most recent recipes</h2>
+        #{/if}
+        #{else}
+            <h2>Rcipes matching your research:</h2>
+        #{/else}
     
         #{list items:recipes, as:'recipe'}
             #{display recipe:recipe, as:'teaser' /}

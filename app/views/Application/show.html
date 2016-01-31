@@ -27,7 +27,7 @@
 <h3>Post a comment</h3>
  
 #{form @Application.postComment(recipe.id)}
-
+    <div class="form">
     #{ifErrors}
         <p class="error">
             ${errors[0]}
@@ -35,8 +35,9 @@
     #{/ifErrors}
     
     <p>
-        <label for="login">Rating: </label>
-        <input type="range" name="rating" id="rating" min="0" max="5" />
+        <label for="rating">Rating: </label>
+        <input name="rating" id="input-1" type="number" class="rating" min=0 max=5 step=1 data-show-caption=false>
+        
     </p>
     <p>
         <label for="content">Your message: </label>
@@ -52,6 +53,7 @@
     <p>
         <input type="submit" value="Submit your comment" />
     </p>
+    </div>
 #{/form}
 
 <script type="text/javascript" charset="utf-8">
