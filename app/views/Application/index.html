@@ -1,7 +1,7 @@
 #{extends 'main.html' /}
 #{set title:'Home' /}
  
- <button class="btn btn-info" data-toggle="collapse" data-target="#search-area">Find a recipe!</button>
+ <button id="findARecipe" class="btn btn-info" data-toggle="collapse" data-target="#search-area">Find a recipe!</button>
 #{form @index()}
  
     #{ifErrors}
@@ -29,7 +29,7 @@
 	    </div>
 	    #{field 'dishTagsText'}
 	        <label for=${field.name}">
-	            &{'Shearch by tag'}
+	            &{'Search by tag'}
 	        </label>
 	        <input type="text" size="20" id="${field.name}" name="${field.name}" value="${dishTagsText}"/>
 	    #{/field}
@@ -45,7 +45,7 @@
             <h2>Most recent recipes</h2>
         #{/if}
         #{else}
-            <h2>Rcipes matching your research:</h2>
+            <h2>Recipes matching your research:</h2>
         #{/else}
     
         #{list items:recipes, as:'recipe'}

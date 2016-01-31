@@ -4,27 +4,131 @@
 #{selenium 'Check home page'}
 	clearSession()
 	
-    // Open the home page, and check that no error occured
+    // Ouverture page d'accueil, et vérification qu'il n'y a pas d'erreur
     open('/')
     
-    // Check that the recipe is present
-    assertTextPresent('My first recipe')
+    // Vérification de la présence de la recette
+    assertTextPresent('Ma première recette')
     assertTextPresent('by Bobby38, 14 Jan 16')
     assertTextPresent('2 comments , latest by Bobby38')
 #{/selenium}
 
-#{selenium 'Test comments'}
- 
-    // Click on 'My first recipe'
-    clickAndWait('link=My first recipe')
-    assertTextPresent('My first recipe')
+#{selenium 'Test comments failed if not connected'}
+    // Clic sur 'Ma première recette'
+    clickAndWait('link=Ma première recette')
+    assertTextPresent('Ma première recette')
     assertTextPresent('2 comments')
     
-    // Post a new comment
+    // On met un nouveau commentaire
     type('content', 'Good one')
     type('code', 'XXXXX')
     clickAndWait('css=input[type=submit]')
     
-    // Should get an error, still 2 comments
+    // On doit avoir une erreur, toujours 2 commentaires
     assertTextPresent('2 comments')
 #{/selenium}
+
+#{selenium 'Test connexion'}
+	// Connexion
+    clickAndWait('link=Sign in')
+    assertTextPresent('Your login')
+    type('username', 'Jeff33')
+    type('password', 'ensimag')
+    clickAndWait('css=input[type=submit]')
+    assertTextPresent('Welcome Jeff33')
+#{/selenium}
+
+#{selenium 'Test comments success if connected'}
+    // On va sur une recette
+    clickAndWait('link=Home')
+    clickAndWait('link=Ma première recette')
+    assertTextPresent('Ma première recette')
+    assertTextPresent('2 comments')
+    
+    // On ajoute un commentaire
+    type('content', 'A big success !')
+    type('code', 'XXXXX')
+    clickAndWait('css=input[type=submit]')
+    
+    // Il y a maintenant 3 commentaires
+    assertTextPresent('3 comments')
+#{/selenium}
+
+#{selenium 'Test add recipe'}
+    // Ouverture de la page pour créer une nouvelle recette
+    clickAndWait('link=Jeff33')
+    clickAndWait('link=My recipes')
+    clickAndWait('link=Add Recipe')
+    assertTextPresent('Title')
+    
+    // Remplissage des champs nécessaires
+    type('object_title', 'Quiche lorraine')
+    select('object_category', 'Entrée')
+    type('object_preparationTime', '20')
+    type('object_cookingTime', '30')
+    type('object_numberOfPersons', '4')
+    type('ingredients', 'lardons')
+    type('object_content', 'Mélanger, verser, cuire => manger !')
+    type('tags', 'tarte')
+    clickAndWait('css=input[name=_save]')
+    
+    // Retour sur la page des recettes (avec la nouvelle)
+    assertTextPresent('Quiche lorraine')
+#{/selenium}
+
+#{selenium 'Test editing a recipe'}
+    clickAndWait('link=Recipes')
+    clickAndWait('link=Ma première recette')
+    
+    // Modification du contenu
+    type('object_content', 'Recette plus mystérieuse : débrouillez-vous')
+    clickAndWait('css=input[name=_saveAndContinue]')
+    
+    // Vérification de la modification du contenu
+    assertTextPresent('Recette plus mystérieuse : débrouillez-vous')
+#{/selenium}
+
+#{selenium 'Test recipes research'}
+    //clickAndWait('link=Home')
+    //assertTextPresent('Select categories')
+    
+    // Sélection des viandes en sauce
+    //check('Viande en sauce', true)
+    //assertChecked('Viande en sauce')
+    //runScriptAndWait('dishCategoryCheckboxes.js')
+    
+    // Lancement de la recherche
+    //clickAndWait('css=input[value="Search recipes"]')
+    
+    // Vérification de la recherche
+    //assertTextPresent('Ma première recette')
+    //assertTextNotPresent('Une recette à ne pas louper')
+#{/selenium}
+
+#{selenium 'Test account creation'}
+	clearSession()
+	
+    // Open the home page, and check that no error occured
+    open('/')
+    
+    // Account creation
+    clickAndWait('link=Sign up')
+    assertTextPresent('Create your account:')
+    type('login', 'BestCookerEver')
+    type('email', 'bestcook@gmail.com')
+    type('password', 'bcebce38')
+    clickAndWait('css=input[type=submit]')
+    
+    // Le compte a bien été créé, on est redirigé pour se connecter
+    assertTextPresent('Your login')
+    
+    // On se connecte
+    type('username', 'BestCookerEver')
+    type('password', 'bcebce38')
+    clickAndWait('css=input[type=submit]')
+    assertTextPresent('Welcome BestCookerEver')
+    
+    // On est bien un simple utilisateur, pas d'accès à l'ensemble des recettes
+    assertTextNotPresent('Recipes')
+#{/selenium}
+

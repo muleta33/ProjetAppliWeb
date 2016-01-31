@@ -54,11 +54,9 @@ public class Application extends Controller {
     public static void postComment(Long recipeId, String login, 
             @Required(message="A message is required") String content, int rating, 
             @Required(message="Please type the code") String code, String randomID) {
-        if(!Play.id.equals("test")) {
-            validation.equals(code, Cache.get(randomID)).message("Invalid code. Please type it again");
-        }
         Recipe recipe = Recipe.findById(recipeId);
-        validation.equals(code, Cache.get(randomID)).message("Invalid code. Please type it again");
+        if(!Play.id.equals("test"))
+            validation.equals(code, Cache.get(randomID)).message("Invalid code. Please type it again");
         // Retrieve and check if the user is connected user
         User user = User.find("byLogin", Security.connected()).first();
         validation.required(user).message("You have to be connected to post a comment");

@@ -19,6 +19,9 @@ email=Email
 login=Login
 password=Password
 isAdmin=User is admin
+DishCategories=Dish categories
+subCategories=Sub-categories
+hasAFather=Has a "father category"
 
 secure.username=Your login:
 secure.password=Your password:
