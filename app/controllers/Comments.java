@@ -1,6 +1,7 @@
 package controllers;
 
 import play.*;
+import play.exceptions.TemplateNotFoundException;
 import play.mvc.*;
 
 @Check("admin")

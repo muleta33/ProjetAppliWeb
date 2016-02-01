@@ -1,0 +1,76 @@
+#{extends 'CRUD/layout.html' /}
+#{set title:messages.get('crud.show.title', type.modelName) /}
+
+<div id="crudShow" class="${type.name}">
+
+    <h2 id="crudShowTitle">&{'crud.show.title', type.modelName}</h2>
+
+    <div class="objectForm">
+    #{form action:@save(object._key()), enctype:'multipart/form-data'}
+        #{crud.form}
+            #{crud.custom 'postedAt'}
+                <label for="postedAt">
+                    &{'postedAt'}
+                </label>
+                <div class="date-class">
+                     <span id="date">
+                         ${object.postedAt}
+                     </span> 
+                </div>
+            #{/crud.custom}
+            #{crud.custom 'rating'}
+                <label for="rating">
+                    &{'rating'}
+                </label>
+                <div class="rating-class">
+                     <span id="rating">
+                         ${object.rating}
+                     </span> 
+                </div>
+            #{/crud.custom}
+            #{crud.custom 'content'}
+                <label for="content">
+                    &{'content'}
+                </label>
+                <div class="content-class">
+                     <span id="content">
+                         ${object.content}
+                     </span> 
+                </div>
+            #{/crud.custom}
+            #{crud.custom 'author'}
+                <label for="author">
+                    &{'author'}
+                </label>
+                <div class="author-class">
+                     <span id="author">
+                         ${object.author}
+                     </span> 
+                </div>
+            #{/crud.custom}
+            #{crud.custom 'recipe'}
+                <label for="recipe">
+                    &{'author'}
+                </label>
+                <div class="recipe-class">
+                     <span id="recipe">
+                         ${object.recipe.title}
+                     </span> 
+                </div>
+            #{/crud.custom}
+        #{/crud.form}
+            
+        <p class="crudButtons">
+            <input type="submit" name="_save" value="&{'crud.save', type.modelName}" />
+            <input type="submit" name="_saveAndContinue" value="&{'crud.saveAndContinue', type.modelName}" />
+        </p>
+    #{/form}
+    </div>
+
+    #{form @delete(object._key())}
+        <p class="crudDelete">
+            <input type="submit" value="&{'crud.delete', type.modelName}" />
+        </p>
+    #{/form}
+
+</div>
