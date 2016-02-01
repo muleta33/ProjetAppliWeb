@@ -49,8 +49,8 @@ public class Recipe extends Model {
     @ManyToMany(cascade=CascadeType.PERSIST)
     public Set<Tag> tags;
     
-    public Recipe(User author, String title, DishCategory category, int preparationTime, int cookingTime, int numberOfPersons, 
-                  Set<Ingredient> ingredients, Set<Tag> tags, String content) {
+    public Recipe(User author, String title, DishCategory category, int preparationTime, int cookingTime, 
+                  int numberOfPersons, String content) {
         this.author = author;
         this.title = title;
         this.category = category;
@@ -58,9 +58,9 @@ public class Recipe extends Model {
         this.preparationTime = preparationTime;
         this.cookingTime = cookingTime;
         this.numberOfPersons = numberOfPersons;
-        this.ingredients = new TreeSet<Ingredient>(ingredients);
+        this.ingredients = new TreeSet<Ingredient>();
         this.comments = new ArrayList<Comment>();
-        this.tags = new TreeSet<Tag>(tags);
+        this.tags = new TreeSet<Tag>();
         this.content = content;
         this.postedAt = new Date();
     }
@@ -91,6 +91,11 @@ public class Recipe extends Model {
 
     public Recipe next() {
         return Recipe.find("postedAt > ? order by postedAt asc", postedAt).first();
+    }
+    
+    public Recipe addIngredient(String name) {
+        ingredients.add(Ingredient.findOrCreateByName(name));
+        return this;
     }
     
     public Recipe tagItWith(String name) {

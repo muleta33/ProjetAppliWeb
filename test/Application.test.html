@@ -89,20 +89,19 @@
 #{/selenium}
 
 #{selenium 'Test recipes research'}
-    //clickAndWait('link=Home')
-    //assertTextPresent('Select categories')
+    clickAndWait('link=Home')
+    assertTextPresent('Select categories')
     
     // Sélection des viandes en sauce
-    //check('Viande en sauce', true)
-    //assertChecked('Viande en sauce')
-    //runScriptAndWait('dishCategoryCheckboxes.js')
+    click('css=input[id='Viande en sauce']')
+    assertChecked('Viande en sauce')
     
     // Lancement de la recherche
-    //clickAndWait('css=input[value="Search recipes"]')
+    clickAndWait('css=input[value="Search recipes"]')
     
     // Vérification de la recherche
-    //assertTextPresent('Ma première recette')
-    //assertTextNotPresent('Une recette à ne pas louper')
+    assertTextPresent('Ma première recette')
+    assertTextNotPresent('Une recette à ne pas louper')
 #{/selenium}
 
 #{selenium 'Test account creation'}
