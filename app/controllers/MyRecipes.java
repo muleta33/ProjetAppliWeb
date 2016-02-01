@@ -48,21 +48,20 @@ public class MyRecipes extends CRUD {
     
     public static void create(String tags, String ingredients) throws Exception {
         User user = User.find("byLogin", Security.connected()).first();
-        Set<Ingredient> ingredientsList = new TreeSet<Ingredient>();
-        Set<Tag> tagsList = new TreeSet<Tag>();
+        Recipe recipe = new Recipe(user, "", null, 0, 0, 0, "");
         // Set tags list
         for(String tag : tags.split("\\s+")) {
             if(tag.trim().length() > 0) {
-                tagsList.add(Tag.findOrCreateByName(tag));
+                recipe.tagItWith(tag);
             }
         }
         // Set ingredients list
         for(String ingredient : ingredients.split("\\n+")) {
             if(ingredient.trim().length() > 0) {
-                ingredientsList.add(Ingredient.findOrCreateByName(ingredient));
+                recipe.addIngredient(ingredient);
             }
         }
-        Recipe recipe = new Recipe(user, "", null, 0, 0, 0, ingredientsList, tagsList, "");
+        
         Binder.bindBean(params.getRootParamNode(), "object", recipe);
         validation.valid(recipe);
         if (validation.hasErrors()) {
