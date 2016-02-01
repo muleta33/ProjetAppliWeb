@@ -10,7 +10,7 @@
     </div>
 
     <div id="crudListTable">
-        #{crud.table fields:['content', 'recipe', 'author']}
+        #{crud.table fields:['author', 'recipe', 'postedAt']}
  			#{crud.custom 'content'}
   				<a href="@{Comments.show(object.id)}">
    					${object.content.length() > 50 ? object.content[0..50] + '…' : object.content}
@@ -22,9 +22,5 @@
     <div id="crudListPagination">
         #{crud.pagination /}
     </div>
-
-    <p id="crudListAdd">
-        <a href="@{blank()}">&{'crud.add', type.modelName}</a>
-    </p>
 
 </div>

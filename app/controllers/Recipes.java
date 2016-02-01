@@ -53,5 +53,12 @@ public class Recipes extends CRUD {
         }
         redirect(request.controller + ".show", object._key());
     }
+    
+    /* Redefinition pour empêcher l'admin de créer et d'ajouter
+     * une recette en tant que n'importe quel utilisateur
+     */
+    public static void blank() throws Exception {
+        redirect(request.controller + ".list");
+    }
 
 }

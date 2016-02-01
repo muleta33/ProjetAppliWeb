@@ -22,7 +22,11 @@
             <ul id="tools">
                 <li>
                     <a href="@{AccountCreation.form()}">${user != null ? '' : 'Sign up'} </a>
+                </li>
+                <li>
                     <a href="@{Admin.index()}">${user != null ? user.login : 'Sign in'} </a>
+                </li>
+                <li>
                     <a href="@{Secure.logout()}">${user != null ? 'Log out' : ''}</a>
                 </li>
             </ul>

@@ -33,9 +33,7 @@
                     &{'content'}
                 </label>
                 <div class="content-class">
-                     <span id="content">
-                         ${object.content}
-                     </span> 
+                     <textarea rows="5" cols="50" readonly>${object.content}</textarea> 
                 </div>
             #{/crud.custom}
             #{crud.custom 'author'}
@@ -50,7 +48,7 @@
             #{/crud.custom}
             #{crud.custom 'recipe'}
                 <label for="recipe">
-                    &{'author'}
+                    &{'recipe'}
                 </label>
                 <div class="recipe-class">
                      <span id="recipe">
