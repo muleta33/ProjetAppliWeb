@@ -12,9 +12,6 @@ GET     /                                       Application.index
 GET     /admin/?                                Admin.index
 *       /admin                                  module:crud
 
-GET     /search 	                         	Admin.form
-POST    /search	                        	    Admin.save
-
 # Specify a custom path for the Application.show action
 GET     /recipes/{<[0-9]+>id}                   Application.show
 

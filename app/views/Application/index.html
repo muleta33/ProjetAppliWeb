@@ -55,11 +55,4 @@
     
 #{/if}
 
-<script type="text/javascript" charset="utf-8">
-    $(function() {         
-        // S'il y a eu une recherche avant, focus to form
-        if($('input[type="hidden"]').val() != "") {
-        	$('html').scrollTop($(".recipes").offset().top);
-        }
-    });
-</script>
+<script src="@{'/public/javascripts/dishCategoryCheckboxes.js'}"></script>

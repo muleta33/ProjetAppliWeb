@@ -3,8 +3,8 @@
 <div class="recipe ${_as == 'teaser' ? 'teaser' : ''}">
     <h3 class="recipe-title">
         <a href="@{Application.show(_recipe.id)}">${_recipe.title}</a>
-        #{if _recipe.comments.size() != 0} 
-            <input class="rating" data-disabled="true" value="${_recipe.computeRating().nl2br()}" data-size="xs" data-show-clear="false" data-show-caption="false" glyphicon="false"> 
+        #{if _recipe.computeRating() != 0} 
+            <input class="rating" data-disabled="true" value="${_recipe.rating}" data-size="xs" data-show-clear="false" data-show-caption="false" glyphicon="false"> 
         #{/if}
     </h3>
     

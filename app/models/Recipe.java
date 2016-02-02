@@ -69,6 +69,7 @@ public class Recipe extends Model {
         Comment newComment = new Comment(this, author, content, rating).save();
         this.comments.add(newComment);
         this.save();
+        computeRating();
         return this;
     }
     
@@ -81,7 +82,8 @@ public class Recipe extends Model {
                 notNullRatings ++;
             }
         }
-        rating /= notNullRatings;
+        if (notNullRatings != 0)
+            rating /= notNullRatings;
         return rating;
     }
     
