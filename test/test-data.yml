@@ -1,15 +1,24 @@
 # you describe your data using the YAML notation here
 # and then load them using Fixtures.load("data.yml")
 
-User(bob):
-    email:              bob@gmail.com
-    login:              Bobby38
-    password:           secret
+# clear password = ensimag
+User(antoine):
+    email:              antoine@gmail.com
+    login:              Antoine
+    password:           Vqbh/ugJiP2RCT6vQMNuJw==
+    
+# clear password = ensimag
+User(john-elie):
+    email:              john.elie@gmail.com
+    login:              John-Elie
+    password:           Vqbh/ugJiP2RCT6vQMNuJw==
 
-User(jeff):
-    email:              jeff@gmail.com
-    login:              Jeff33 
-    password:           secret
+# clear password = ensimag
+User(admin):
+    email:              admin@gmail.com
+    login:              Admin 
+    password:           Vqbh/ugJiP2RCT6vQMNuJw==
+    isAdmin:            true
 
 Ingredient(firstIngredient):
     description:       le premier ingrédient
@@ -17,31 +26,40 @@ Ingredient(firstIngredient):
 Ingredient(secondIngredient):
     description:       le deuxième ingrédient
     
+Ingredient(thirdIngredient):
+    description:       a fantastic ingredient
+    
 DishCategory(salade):
     name:               Salade
     subCategories:      []
+    hasAFather:         true
     
 DishCategory(entreeChaude):
     name:               Entrée chaude
     subCategories:      []
+    hasAFather:         true
     
 DishCategory(entree):
     name:               Entrée
     subCategories:
         - salade
         - entreeChaude
+    hasAFather:         false
     
 DishCategory(viandeSauce):
     name:               Viande en sauce
     subCategories:      []
+    hasAFather:         true
     
 DishCategory(accompagnement):
     name:               Accompagnement
     subCategories:      []
+    hasAFather:         true
     
 DishCategory(platComplet):
     name:               Plat complet
     subCategories:      []
+    hasAFather:         true
     
 DishCategory(plat):
     name:               Plat
@@ -49,33 +67,57 @@ DishCategory(plat):
         - viandeSauce
         - accompagnement
         - platComplet
+    hasAFather:         false
+    
+Tag(firstTag):
+    name:           recipeTag
+ 
+Tag(secondTag):
+    name:           myTag
 
 Recipe(firstBobRecipe):
     postedAt:          2016-01-14
-    author:            bob
-    title:             My first recipe
-    category:          plat
+    author:            antoine
+    title:             Ma première recette
+    category:          viandeSauce
     preparationTime:   25
     cookingTime:       30
     numberOfPersons:   2
     ingredients:
         - firstIngredient
         - secondIngredient
+    tags:
+        - firstTag
     content:            >
                         On mélange tout et c'est prêt.
+                        
+Recipe(firstJeffRecipe):
+    postedAt:          2016-01-18
+    author:            john-elie
+    title:             Une recette à ne pas louper
+    category:          entreeChaude
+    preparationTime:   2
+    cookingTime:       0
+    numberOfPersons:   4
+    ingredients:
+        - thirdIngredient
+    tags:
+        - secondTag
+    content:            >
+                        A déguster sans préparation.
 
 Comment(c1):
     postedAt:           2016-01-17
     recipe:             firstBobRecipe
-    author:             jeff
-    rating:             5
+    author:             john-elie
+    rating:             4
     content:            >
                         Hummmm c'est trop bon !
 
 Comment(c2):
     postedAt:           2016-01-18
     recipe:             firstBobRecipe
-    author:             bob
-    rating:             4
+    author:             antoine
+    rating:             3
     content:            >
-                        Merci beaucoup Jeff !
+                        Merci beaucoup John !

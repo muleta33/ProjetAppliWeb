@@ -1,5 +1,7 @@
 import org.junit.*;
 import java.util.*;
+
+import play.libs.Crypto;
 import play.test.*;
 import models.*;
 
@@ -138,30 +140,32 @@ public class BasicTest extends UnitTest {
         Fixtures.loadModels("test-data.yml");
      
         // Count things
-        assertEquals(2, User.count());
-        assertEquals(2, Ingredient.count());
+        assertEquals(3, User.count());
+        assertEquals(3, Ingredient.count());
         assertEquals(7, DishCategory.count());
-        assertEquals(1, Recipe.count());
+        assertEquals(2, Tag.count());
+        assertEquals(2, Recipe.count());
         assertEquals(2, Comment.count());
-     
+
         // Try to connect as users
-        assertNotNull(User.connect("Bobby38", "secret"));
-        assertNotNull(User.connect("Jeff33", "secret"));
-        assertNull(User.connect("Jeff33", "badpassword"));
-        assertNull(User.connect("Tom", "secret"));
+        assertNotNull(User.connect("Antoine", Crypto.passwordHash("ensimag")));
+        assertNotNull(User.connect("John-Elie", Crypto.passwordHash("ensimag")));
+        assertNotNull(User.connect("Admin", Crypto.passwordHash("ensimag")));
+        assertNull(User.connect("John-Elie", Crypto.passwordHash("badpassword")));
+        assertNull(User.connect("Tom", Crypto.passwordHash("ensimag")));
      
         // Find all of Bob's recipes
-        List<Recipe> bobRecipe = Recipe.find("author.login", "Bobby38").fetch();
-        assertEquals(1, bobRecipe.size());
+        List<Recipe> antoineRecipe = Recipe.find("author.login", "Antoine").fetch();
+        assertEquals(1, antoineRecipe.size());
         // Random test
-        assertEquals(2, bobRecipe.get(0).numberOfPersons);
+        assertEquals(2, antoineRecipe.get(0).numberOfPersons);
         // Check the compute of the rating
-        bobRecipe.get(0).computeRating();
-        assertEquals(4.5, bobRecipe.get(0).rating, 0.001);
+        antoineRecipe.get(0).computeRating();
+        assertEquals(3.5, antoineRecipe.get(0).rating, 0.001);
      
         // Find all comments related to Bob's recipes
-        List<Comment> bobRecipeComments = Comment.find("recipe.author.login", "Bobby38").fetch();
-        assertEquals(2, bobRecipeComments.size());
+        List<Comment> antoineRecipeComments = Comment.find("recipe.author.login", "Antoine").fetch();
+        assertEquals(2, antoineRecipeComments.size());
     }
     
     @Test
