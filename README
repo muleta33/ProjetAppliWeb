@@ -1,21 +1,21 @@
 Mini-projet - Construction d'applications web
 
 Auteurs : John-Elie Margot
-	  Antoine Mulet
+          Antoine Mulet
 
 Site web collaboratif de recettes de cuisine intitulé Cooking Star
 
-Ce site web permet d'avoir accés aux différentes recettes qui ont été publiées 
-par des utilisateurs. Un mécanisme de de recherche par catégories de recettes 
+Ce site web permet d'avoir accès aux différentes recettes qui ont été publiées 
+par des utilisateurs. Un mécanisme de recherche par catégories de recettes 
 et par tag est également dispnible.
 
 De plus un utilisateur peut se créer un compte. Une fois connecté, il aura 
-alors accés aux fonctionnalités fonctionnalités suivantes :
+alors accès aux fonctionnalités suivantes :
     - la publication de recettes de cuisine
     - la modification d'une recette qu'il a déjà publiée
     - la publication de commentaires et de notes sur une recette
 
-Enfin, le ou les utilisateurs administrateur(s) du site ont eux accés à une 
+Enfin, le ou les utilisateur(s) administrateur(s) du site ont eux accès à une 
 interface d'administration de type CRUD dans laquelle ils peuvent modifier, 
 ajouter ou supprimer les objets manipulés dans l'application (utilisateurs, 
 recettes, commentaires, tags, catégories ).
@@ -25,11 +25,11 @@ de base mais de faire attention aux détails. Par exemple, nous avons intégré 
 système de recherche au sein de catégories et de sous-catégories en 
 JavaScript/jQuery, nous avons complètement personnalisé l'interface CRUD de 
 play, nous avons utilisé un plugin JavaScript pour la notation des recettes de 
-façon graphique avec des étoiles etc.
+façon graphique avec des étoiles, etc.
 
 Des tests unitaires, applicatifs et sélénium ont également été réalisés.
 
 Des données sont créées à l'initialisation du site. Celles-ci sont situées dans 
-le fichier conf/data.yml. On y retrouve par exemple les login et mots de passe 
+le fichier conf/data.yml. On y retrouve par exemple les logins et mots de passe 
 des utilisateurs (utile pour tester l'application à partir des comptes déjà 
 existants).
