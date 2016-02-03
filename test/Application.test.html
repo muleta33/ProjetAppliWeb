@@ -9,8 +9,8 @@
     
     // Vérification de la présence de la recette
     assertTextPresent('Ma première recette')
-    assertTextPresent('by Bobby38, 14 Jan 16')
-    assertTextPresent('2 comments , latest by Bobby38')
+    assertTextPresent('by Antoine, 14 Jan 16')
+    assertTextPresent('2 comments , latest by Antoine')
 #{/selenium}
 
 #{selenium 'Test comments failed if not connected'}
@@ -32,10 +32,10 @@
 	// Connexion
     clickAndWait('link=Sign in')
     assertTextPresent('Your login')
-    type('username', 'Jeff33')
+    type('username', 'Admin')
     type('password', 'ensimag')
     clickAndWait('css=input[type=submit]')
-    assertTextPresent('Welcome Jeff33')
+    assertTextPresent('Welcome Admin')
 #{/selenium}
 
 #{selenium 'Test comments success if connected'}
@@ -56,7 +56,7 @@
 
 #{selenium 'Test add recipe'}
     // Ouverture de la page pour créer une nouvelle recette
-    clickAndWait('link=Jeff33')
+    clickAndWait('link=Admin')
     clickAndWait('link=My recipes')
     clickAndWait('link=Add Recipe')
     assertTextPresent('Title')
